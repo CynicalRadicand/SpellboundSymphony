@@ -1,6 +1,9 @@
+using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Conductor : MonoBehaviour
 {
@@ -22,10 +25,20 @@ public class Conductor : MonoBehaviour
     //an AudioSource attached to this GameObject that will play the music.
     public AudioSource musicSource;
 
-    //Pulse Border
-    public GameObject Border;
+    //The previous beat count as an integer to chec kif the beat changes
+    private int prevBeat = 0;
 
-    private int PrevBeat = 0;
+    //previous beat in seconds for timing calculation
+    private float prevSec = 0;
+
+    //Event for OnBeat, includes Position in song by seconds and beat
+    [System.Serializable]
+    public class OnBeatEvent : UnityEvent<float, float>
+    {
+    }
+
+    //Create OnBeatEvent
+    public OnBeatEvent onBeatEvent;
 
     // Start is called before the first frame update
     void Start()
@@ -65,20 +78,20 @@ public class Conductor : MonoBehaviour
     {
         int CurBeat = Mathf.FloorToInt(beat);
 
-        if (CurBeat>PrevBeat) {
-            PrevBeat = Mathf.FloorToInt(beat);
+        if (CurBeat>prevBeat) {
+            prevBeat = Mathf.FloorToInt(beat);
             return true;
         }
 
-        PrevBeat = Mathf.FloorToInt(beat);
         return false;
     }
 
     //Triggers on Beat
     private void OnBeat()
     {
-        Debug.Log("ONBEAT"+PrevBeat);
-        //Border.GetComponent<Fade>().Pulse();
+        Debug.Log("ONBEAT"+prevBeat);
+        //Evoke the OnBeatEvent to subscribers
+        onBeatEvent?.Invoke(songPositionInSec, songPositionInBeats);
     }
 
     public float GetPosInBeat()
