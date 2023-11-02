@@ -28,15 +28,6 @@ public class Conductor : MonoBehaviour
     //The previous beat count as an integer to chec kif the beat changes
     private int prevBeat = 0;
 
-    //previous beat in seconds for timing calculation
-    private float prevSec = 0;
-
-    //Event for OnBeat, includes Position in song by seconds and beat
-    [System.Serializable]
-    public class OnBeatEvent : UnityEvent<float, float>
-    {
-    }
-
     //Create OnBeatEvent
     public OnBeatEvent onBeatEvent;
 
@@ -89,9 +80,8 @@ public class Conductor : MonoBehaviour
     //Triggers on Beat
     private void OnBeat()
     {
-        Debug.Log("ONBEAT"+prevBeat);
         //Evoke the OnBeatEvent to subscribers
-        onBeatEvent?.Invoke(songPositionInSec, songPositionInBeats);
+        onBeatEvent?.Invoke(songPositionInSec);
     }
 
     public float GetPosInBeat()
