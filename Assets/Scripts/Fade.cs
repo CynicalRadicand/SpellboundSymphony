@@ -6,14 +6,13 @@ using UnityEngine.UI;
 public class Fade : MonoBehaviour
 {
     [SerializeField] private CanvasGroup border;
+    [SerializeField] private GameObject conductor;
 
     private void Update()
     {
-        border.alpha -= Time.deltaTime;
-    }
+        float beat = conductor.GetComponent<Conductor>().GetPosInBeat();
 
-    public void Pulse()
-    {
-        border.alpha = 1;
+        // fade proportional to last beat
+        border.alpha = 1 - (beat % 1);
     }
 }

@@ -78,6 +78,11 @@ public class Conductor : MonoBehaviour
     private void OnBeat()
     {
         Debug.Log("ONBEAT"+PrevBeat);
-        Border.GetComponent<Fade>().Pulse();
+        //Border.GetComponent<Fade>().Pulse();
+    }
+
+    public float GetPosInBeat()
+    {
+        return songPositionInBeats;
     }
 }

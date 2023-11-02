@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b43377a50b9f14eafd6f1b17dad534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  songBpm: 45
+  songBpm: 180
   secPerBeat: 0
   songPositionInSec: 0
   songPositionInBeats: 0
@@ -635,6 +635,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   border: {fileID: 1472177613}
+  conductor: {fileID: 834367327}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
