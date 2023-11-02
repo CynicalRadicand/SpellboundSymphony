@@ -10,10 +10,8 @@ public class RuneStoreController : MonoBehaviour
 
     private void Start()
     {
-        runes = new List<Rune>();
+        runes = new();
     }
-
-
 
 
     public List<Rune> GetRunes()
@@ -34,5 +32,15 @@ public class RuneStoreController : MonoBehaviour
     public int GetSize()
     {
         return runes.Count;
+    }
+
+    public bool IsFull()
+    {
+        return runes.Count == 4;
+    }
+
+    public override string ToString()
+    {
+        return new RuneSequence(runes).ToString();
     }
 }
