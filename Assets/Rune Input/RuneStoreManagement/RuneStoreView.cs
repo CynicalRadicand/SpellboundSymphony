@@ -19,7 +19,7 @@ public class RuneStoreView : MonoBehaviour
 
     public void ShowSuccessfulCast(Spell spell)
     {
-        Debug.Log($"Successfully cast spell: {spell}");
+        Debug.Log($"Successfully cast spell: {spell.name}");
     }
 
     public void ShowFailedCast(string message)

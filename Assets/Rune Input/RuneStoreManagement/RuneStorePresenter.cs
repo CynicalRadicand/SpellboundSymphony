@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 public class RuneStorePresenter : MonoBehaviour
 {
-    RuneStoreView storeView;
-    RuneStoreController storeController;
-    SpellCastPresenter spellCastPresenter;
+    [SerializeField] RuneStoreView storeView;
+    [SerializeField] RuneStoreController storeController;
+    [SerializeField] SpellCastPresenter spellCastPresenter;
 
     public void AddRune(Rune rune)
     {
@@ -31,8 +31,6 @@ public class RuneStorePresenter : MonoBehaviour
     private void CastRunes()
     {
         List<Rune> runes = storeController.GetRunes();
-        storeController.ClearQueue();
-
         storeView.ShowCasting(new RuneSequence(runes));
 
         Spell spell = spellCastPresenter.GetSpell(runes);
@@ -46,6 +44,7 @@ public class RuneStorePresenter : MonoBehaviour
             storeView.ShowFailedCast("Incorrect rune order.");
         }
 
+        storeController.ClearQueue();
     }
 
     // TODO: see how to integrate this with Conductor class

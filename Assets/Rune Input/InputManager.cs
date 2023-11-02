@@ -18,19 +18,19 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetKeyDown(keyBindings.KeyAir))
         {
-            storePresenter.AddRune(new Rune(Elements.AIR));
+            storePresenter.AddRune(new Rune(Elements.AIR, "A"));
         }
         if (Input.GetKeyDown(keyBindings.KeyFire))
         {
-            storePresenter.AddRune(new Rune(Elements.FIRE));
+            storePresenter.AddRune(new Rune(Elements.FIRE, "F"));
         }
         if (Input.GetKeyDown(keyBindings.KeyEarth))
         {
-            storePresenter.AddRune(new Rune(Elements.EARTH));
+            storePresenter.AddRune(new Rune(Elements.EARTH, "E"));
         }
         if (Input.GetKeyDown(keyBindings.KeyWater))
         {
-            storePresenter.AddRune(new Rune(Elements.WATER));
+            storePresenter.AddRune(new Rune(Elements.WATER, "W"));
         }
     }
 }

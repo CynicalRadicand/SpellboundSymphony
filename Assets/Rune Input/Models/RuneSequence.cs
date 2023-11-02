@@ -9,16 +9,16 @@ public class RuneSequence
 
     public RuneSequence(List<Rune> runes)
     {
-        for (int i = 0; i < 4; i++)
+        this.runes = runes.ToArray();
+
+        // Replace null items with NONE runes.
+        for (int i = 0; i < this.runes.Length; i++)
         {
-            Rune rune = runes[i];
-
-            if (rune == null)
+            if (this.runes[i] == null)
             {
-                rune = new Rune(Elements.NONE);
+                // FIXME: probably need a better way to get template runes
+                this.runes[i] = new Rune(Elements.NONE, " ");
             }
-
-            this.runes[i] = rune;
         }
     }
 
@@ -33,7 +33,7 @@ public class RuneSequence
 
         foreach (Rune rune in runes)
         {
-            output += $"({rune.element})";
+            output += $"({rune.symbol})";
         }
         output += "]";
 
