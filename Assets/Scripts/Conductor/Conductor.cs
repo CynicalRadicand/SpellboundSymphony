@@ -22,8 +22,7 @@ public class Conductor : MonoBehaviour
     //Audio system based start time (more accurate to music)
     [SerializeField] private float dspSongStartTime;
 
-    //an AudioSource attached to this GameObject that will play the music.
-    public AudioSource musicSource;
+    [SerializeField] private AudioManager audioManager;
 
     //The previous beat count as an integer to chec kif the beat changes
     private int prevBeat = 0;
@@ -34,19 +33,11 @@ public class Conductor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Load the AudioSource attached to the Conductor GameObject
-        musicSource = GetComponent<AudioSource>();
-
-        musicSource.loop = true;
+        audioManager.onPlayEvent.AddListener(Play);
 
         //Calculate the number of seconds in each beat
         secPerBeat = 60f / songBpm;
 
-        //Record the time when the music starts
-        dspSongStartTime = (float)AudioSettings.dspTime;
-
-        //Start the music
-        musicSource.Play();
     }
 
     // Update is called once per frame
@@ -62,6 +53,12 @@ public class Conductor : MonoBehaviour
         {
             OnBeat();
         }
+    }
+
+    private void Play(float startTime)
+    {
+        //Record the time when the music starts
+        dspSongStartTime = (float)AudioSettings.dspTime;
     }
 
     //Detects when the beat ticks over

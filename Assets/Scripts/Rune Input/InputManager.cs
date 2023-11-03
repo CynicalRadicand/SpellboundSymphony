@@ -6,6 +6,7 @@ public class InputManager : MonoBehaviour
 {
     [SerializeField] KeyBindings keyBindings;
     [SerializeField] RuneStorePresenter storePresenter;
+    [SerializeField] AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,10 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(keyBindings.KeyWater))
         {
             storePresenter.AddRune(new Rune(Elements.WATER, "W"));
+        }
+        if (Input.GetKeyDown(keyBindings.KeyConfirm))
+        {
+            audioManager.Play();
         }
     }
 }
