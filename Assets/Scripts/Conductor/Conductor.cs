@@ -55,10 +55,10 @@ public class Conductor : MonoBehaviour
         }
     }
 
-    private void Play(float startTime)
+    private void Play()
     {
         //Record the time when the music starts
-        dspSongStartTime = (float)AudioSettings.dspTime;
+        dspSongStartTime = audioManager.startTimeSec;
     }
 
     //Detects when the beat ticks over

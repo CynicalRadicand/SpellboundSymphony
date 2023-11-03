@@ -5,6 +5,6 @@ using UnityEngine.Events;
 
 //Event for OnPlay, includes start time in song by seconds
 [System.Serializable]
-public class OnPlayEvent : UnityEvent<float>
+public class OnPlayEvent : UnityEvent
 {
 }

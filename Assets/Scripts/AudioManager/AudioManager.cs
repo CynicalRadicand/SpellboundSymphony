@@ -10,17 +10,7 @@ public class AudioManager : MonoBehaviour
     //Create OnPlayEvent
     public OnPlayEvent onPlayEvent;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public float startTimeSec;
 
     public AudioSource getMusicSource() { return musicSource; }
 
@@ -29,11 +19,11 @@ public class AudioManager : MonoBehaviour
         musicSource.loop = true;
 
         //Record the time when the music starts
-        float dspSongStartTime = (float)AudioSettings.dspTime;
+        startTimeSec = (float)AudioSettings.dspTime;
 
         //Start the music
         musicSource.Play();
 
-        onPlayEvent.Invoke(dspSongStartTime);
+        onPlayEvent.Invoke();
     }
 }
