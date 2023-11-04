@@ -203,6 +203,7 @@ MonoBehaviour:
   songPosBeats: 0
   startTime: 0
   audioManager: {fileID: 2005988991}
+  playing: 0
   onBeatEvent:
     m_PersistentCalls:
       m_Calls: []

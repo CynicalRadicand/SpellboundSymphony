@@ -9,7 +9,7 @@ public class TimingManager : MonoBehaviour
     [SerializeField] AudioManager audioManager;
 
     //Audio system based start time (more accurate to music)
-    [SerializeField] private float startTime;
+    [SerializeField] private float startTime = 0;
 
     [SerializeField] private float inputTime = -1;
     [SerializeField] private float beatTime = -1;
@@ -60,9 +60,6 @@ public class TimingManager : MonoBehaviour
             //TODO: apply hit effects
             switch(timeDifferenceMs)
             {
-                case > 100:
-                    Debug.Log("TOO LATE");
-                    break;
                 case <= 100 and > 75:
                     Debug.Log("LATE 4");
                     break;

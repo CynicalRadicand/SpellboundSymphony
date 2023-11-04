@@ -11,16 +11,16 @@ public class Conductor : MonoBehaviour
     public float songBpm;
 
     //The number of seconds for each song beat
-    [SerializeField] private float secPerBeat;
+    [SerializeField] private float secPerBeat = 0;
 
     //Current song position, in seconds
-    [SerializeField] private float songPosSec;
+    [SerializeField] private float songPosSec = 0;
 
     //Current song position, in beats
-    [SerializeField] private float songPosBeats;
+    [SerializeField] private float songPosBeats = 0;
 
     //Audio system based start time (more accurate to music)
-    [SerializeField] private float startTime;
+    [SerializeField] private float startTime = 0;
 
     [SerializeField] private AudioManager audioManager;
 

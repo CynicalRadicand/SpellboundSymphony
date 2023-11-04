@@ -19,16 +19,18 @@ public class AudioManager : MonoBehaviour
         musicSource.loop = true;
 
         musicSource.playOnAwake = false;
+
+        musicSource.clip.LoadAudioData();
     }
 
     public void Play()
     {
-        //Record the time when the music starts
-        startTimeSec = (float)AudioSettings.dspTime;
+        onPlayEvent.Invoke();
 
         //Start the music
         musicSource.Play();
 
-        onPlayEvent.Invoke();
+        //Record the time when the music starts
+        startTimeSec = (float)AudioSettings.dspTime;
     }
 }
