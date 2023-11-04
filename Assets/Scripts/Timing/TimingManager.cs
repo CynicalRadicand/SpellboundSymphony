@@ -6,6 +6,10 @@ public class TimingManager : MonoBehaviour
 {
     public Conductor conductor;
     public InputManager inputManager;
+    [SerializeField] AudioManager audioManager;
+
+    //Audio system based start time (more accurate to music)
+    [SerializeField] private float startTime;
 
     [SerializeField] private float inputTime = -1;
     [SerializeField] private float beatTime = -1;
@@ -17,27 +21,32 @@ public class TimingManager : MonoBehaviour
     {
         conductor.onBeatEvent.AddListener(LogBeat);
         inputManager.onInputEvent.AddListener(LogInput);
+        audioManager.onPlayEvent.AddListener(Play);
+    }
+
+    private void Update()
+    {
+        if (beatTime > 0 && inputTime < 0)
+        {
+            float msSinceLastBeat = (float)(AudioSettings.dspTime - startTime - beatTime)*1000;
+            if (msSinceLastBeat > 100)
+            {
+                Debug.Log("Miss by Late");
+                ResetTime();
+                //TODO: Add Miss Effect
+            }
+        }
+
     }
 
     private void LogInput(float time)
     {
-        if (inputTime > 0) {
-            //TODO: Apply miss effects
-            Debug.Log("Miss by double input");
-            ResetTime();
-        }
         inputTime = time;
         CheckTiming();
     }
 
     private void LogBeat(float time)
     {
-        if (beatTime > 0)
-        {
-            //TODO: Apply miss effects
-            Debug.Log("Miss by double beat");
-            ResetTime();
-        }
         beatTime = time;
         CheckTiming();
     }
@@ -48,6 +57,7 @@ public class TimingManager : MonoBehaviour
         {
             float timeDifferenceMs = (inputTime - beatTime) * 1000;
             Debug.Log("Time Difference: " + timeDifferenceMs);
+            //TODO: apply hit effects
             switch(timeDifferenceMs)
             {
                 case > 100:
@@ -84,7 +94,7 @@ public class TimingManager : MonoBehaviour
                     Debug.Log("TOO EARLY");
                     break;
                 default:
-                    Debug.Log("SUMTING WONG");
+                    Debug.Log("INVALID TIME DIFFERENCE");
                     break;
             }
 
@@ -93,9 +103,16 @@ public class TimingManager : MonoBehaviour
         }
     }
 
+    //Reset values every miss or hit
     private void ResetTime()
     {
-        inputTime = 0;
-        beatTime = 0;
+        inputTime = -1;
+        beatTime = -1;
+    }
+
+    private void Play()
+    {
+        //Record the time when the music starts
+        startTime = audioManager.startTimeSec;
     }
 }

@@ -834,6 +834,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conductor: {fileID: 834367329}
   inputManager: {fileID: 983255944}
+  audioManager: {fileID: 2005988991}
+  startTime: 0
   inputTime: -1
   beatTime: -1
 --- !u!4 &2146915012
