@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Android;
 
 public class TimingManager : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class TimingManager : MonoBehaviour
     [SerializeField] private float inputTime = -1;
     [SerializeField] private float beatTime = -1;
 
+    private int combo = 0;
+
     //TODO: add bool for checking for cast blocking
 
     // Start is called before the first frame update
@@ -26,12 +29,13 @@ public class TimingManager : MonoBehaviour
 
     private void Update()
     {
-        if (beatTime > 0 && inputTime < 0)
+        if (beatTime > 0 && inputTime < 0 && combo > 0)
         {
             float msSinceLastBeat = (float)(AudioSettings.dspTime - startTime - beatTime)*1000;
             if (msSinceLastBeat > 100)
             {
                 Debug.Log("Miss by Late");
+                Miss();
                 ResetTime();
                 //TODO: Add Miss Effect
             }
@@ -57,41 +61,33 @@ public class TimingManager : MonoBehaviour
         {
             float timeDifferenceMs = (inputTime - beatTime) * 1000;
             Debug.Log("Time Difference: " + timeDifferenceMs);
-            //TODO: apply hit effects
+
+            //TODO: Time difference to animate slider for accuracy visualisation
             switch(timeDifferenceMs)
             {
-                case <= 100 and > 75:
-                    Debug.Log("LATE 4");
-                    break;
-                case <= 75 and > 50:
-                    Debug.Log("LATE 3");
-                    break;
-                case <= 50 and > 25:
-                    Debug.Log("LATE 2");
-                    break;
-                case <= 25 and > 10:
-                    Debug.Log("LATE 1");
-                    break;
                 case <= 10 and >= -10:
                     Debug.Log("PERFECT");
+                    Hit(Timings.PERFECT);
                     break;
-                case >= -25 and < -10:
-                    Debug.Log("EARLY 1");
+                case <= 25 and >+ -25:
+                    Debug.Log("EXCELLENT");
+                    Hit(Timings.EXCELLENT);
                     break;
-                case >= -50 and < -25:
-                    Debug.Log("EARLY 2");
+                case <= 50 and >= -50:
+                    Debug.Log("GREAT");
+                    Hit(Timings.GREAT);
                     break;
-                case >= -75 and < -50:
-                    Debug.Log("EARLY 3");
+                case <= 75 and >= -75:
+                    Debug.Log("GOOD");
+                    Hit(Timings.GOOD);
                     break;
-                case >= -100 and < -75:
-                    Debug.Log("EARLY 4");
-                    break;
-                case < -100:
-                    Debug.Log("TOO EARLY");
+                case <= 100 and >= -100:
+                    Debug.Log("POOR");
+                    Hit(Timings.POOR);
                     break;
                 default:
-                    Debug.Log("INVALID TIME DIFFERENCE");
+                    Debug.Log("MISS");
+                    Miss();
                     break;
             }
 
@@ -114,4 +110,18 @@ public class TimingManager : MonoBehaviour
 
         ResetTime();
     }
+
+    private void Hit(Timings timings) {
+        //TODO: Play animation and add rune with timing and combo multipliers
+        combo++;
+        ResetTime();
+    }
+    //Or
+    private void Miss()
+    {
+        //TODO: Clear runes and play miss animation
+        combo = 0;
+        ResetTime();
+    }
+    //I guess they never miss huh?
 }
