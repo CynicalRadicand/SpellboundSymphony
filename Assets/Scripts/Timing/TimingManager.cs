@@ -114,5 +114,7 @@ public class TimingManager : MonoBehaviour
     {
         //Record the time when the music starts
         startTime = audioManager.startTimeSec;
+
+        ResetTime();
     }
 }

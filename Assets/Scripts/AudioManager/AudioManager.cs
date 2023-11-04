@@ -14,10 +14,15 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource getMusicSource() { return musicSource; }
 
-    public void Play()
+    private void Start()
     {
         musicSource.loop = true;
 
+        musicSource.playOnAwake = false;
+    }
+
+    public void Play()
+    {
         //Record the time when the music starts
         startTimeSec = (float)AudioSettings.dspTime;
 

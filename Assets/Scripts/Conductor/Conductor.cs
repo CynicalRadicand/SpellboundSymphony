@@ -24,6 +24,8 @@ public class Conductor : MonoBehaviour
 
     [SerializeField] private AudioManager audioManager;
 
+    [SerializeField] private bool playing = false;
+
     //The previous beat count as an integer to chec kif the beat changes
     private int prevBeat = 0;
 
@@ -43,16 +45,20 @@ public class Conductor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //determine how many seconds since the song started
-        songPosSec = (float)(AudioSettings.dspTime - startTime);
-
-        //determine how many beats since the song started
-        songPosBeats = songPosSec / secPerBeat;
-
-        if (TickOver(songPosBeats))
+        if (playing)
         {
-            OnBeat();
+            //determine how many seconds since the song started
+            songPosSec = (float)(AudioSettings.dspTime - startTime);
+
+            //determine how many beats since the song started
+            songPosBeats = songPosSec / secPerBeat;
+
+            if (TickOver(songPosBeats))
+            {
+                OnBeat();
+            }
         }
+        
     }
 
     private void Play()
@@ -60,8 +66,12 @@ public class Conductor : MonoBehaviour
         //Record the time when the music starts
         startTime = audioManager.startTimeSec;
 
-        //Reset prevBeat
+        //Reset variables
         prevBeat = 0;
+        songPosSec = 0;
+        songPosBeats = 0;
+
+        playing = true;
     }
 
     //Detects when the beat ticks over

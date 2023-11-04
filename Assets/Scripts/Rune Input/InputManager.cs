@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] AudioManager audioManager;
 
     //Audio system based start time (more accurate to music)
-    [SerializeField] private float startTime;
+    [SerializeField] private float startTime = 0;
 
     //Create OnBeatEvent
     public OnInputEvent onInputEvent;
