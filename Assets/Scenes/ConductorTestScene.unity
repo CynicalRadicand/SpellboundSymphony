@@ -197,11 +197,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b43377a50b9f14eafd6f1b17dad534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  songBpm: 70
+  songBpm: 140
   secPerBeat: 0
-  songPositionInSec: 0
-  songPositionInBeats: 0
-  dspSongStartTime: 0
+  songPosSec: 0
+  songPosBeats: 0
+  startTime: 0
   audioManager: {fileID: 2005988991}
   onBeatEvent:
     m_PersistentCalls:
@@ -252,11 +252,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   KeyConfirm: 32
-  KeyCancel: 0
-  KeyAir: 0
-  KeyFire: 0
-  KeyEarth: 0
-  KeyWater: 0
+  KeyCancel: 27
+  KeyAir: 273
+  KeyFire: 275
+  KeyEarth: 274
+  KeyWater: 276
 --- !u!114 &983255944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,6 +272,11 @@ MonoBehaviour:
   keyBindings: {fileID: 983255943}
   storePresenter: {fileID: 0}
   audioManager: {fileID: 2005988991}
+  startTime: 0
+  onInputEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  songPosSec: 0
 --- !u!4 &983255945
 Transform:
   m_ObjectHideFlags: 0
@@ -692,6 +697,7 @@ MonoBehaviour:
   onPlayEvent:
     m_PersistentCalls:
       m_Calls: []
+  startTimeSec: 0
 --- !u!4 &2005988992
 Transform:
   m_ObjectHideFlags: 0
@@ -797,6 +803,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   border: {fileID: 1472177613}
   conductor: {fileID: 834367327}
+--- !u!1 &2146915010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2146915012}
+  - component: {fileID: 2146915011}
+  m_Layer: 0
+  m_Name: TimingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2146915011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146915010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 165ce35d6617d734fba2d10542904da7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conductor: {fileID: 834367329}
+  inputManager: {fileID: 983255944}
+  inputTime: -1
+  beatTime: -1
+--- !u!4 &2146915012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146915010}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 505.38913, y: 298.61322, z: 148.75287}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -808,3 +862,4 @@ SceneRoots:
   - {fileID: 5687732}
   - {fileID: 2005988992}
   - {fileID: 983255945}
+  - {fileID: 2146915012}

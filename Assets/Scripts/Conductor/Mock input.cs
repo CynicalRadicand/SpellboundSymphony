@@ -14,6 +14,6 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void onbeat(float sec)
     {
-        Debug.Log(sec);
+        //Debug.Log(sec);
     }
 }

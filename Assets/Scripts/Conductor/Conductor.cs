@@ -14,13 +14,13 @@ public class Conductor : MonoBehaviour
     [SerializeField] private float secPerBeat;
 
     //Current song position, in seconds
-    [SerializeField] private float songPositionInSec;
+    [SerializeField] private float songPosSec;
 
     //Current song position, in beats
-    [SerializeField] private float songPositionInBeats;
+    [SerializeField] private float songPosBeats;
 
     //Audio system based start time (more accurate to music)
-    [SerializeField] private float dspSongStartTime;
+    [SerializeField] private float startTime;
 
     [SerializeField] private AudioManager audioManager;
 
@@ -44,12 +44,12 @@ public class Conductor : MonoBehaviour
     void Update()
     {
         //determine how many seconds since the song started
-        songPositionInSec = (float)(AudioSettings.dspTime - dspSongStartTime);
+        songPosSec = (float)(AudioSettings.dspTime - startTime);
 
         //determine how many beats since the song started
-        songPositionInBeats = songPositionInSec / secPerBeat;
+        songPosBeats = songPosSec / secPerBeat;
 
-        if (TickOver(songPositionInBeats))
+        if (TickOver(songPosBeats))
         {
             OnBeat();
         }
@@ -58,7 +58,10 @@ public class Conductor : MonoBehaviour
     private void Play()
     {
         //Record the time when the music starts
-        dspSongStartTime = audioManager.startTimeSec;
+        startTime = audioManager.startTimeSec;
+
+        //Reset prevBeat
+        prevBeat = 0;
     }
 
     //Detects when the beat ticks over
@@ -78,11 +81,11 @@ public class Conductor : MonoBehaviour
     private void OnBeat()
     {
         //Evoke the OnBeatEvent to subscribers
-        onBeatEvent?.Invoke(songPositionInSec);
+        onBeatEvent?.Invoke(songPosSec);
     }
 
     public float GetPosInBeat()
     {
-        return songPositionInBeats;
+        return songPosBeats;
     }
 }
