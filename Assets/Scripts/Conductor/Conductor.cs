@@ -26,7 +26,7 @@ public class Conductor : MonoBehaviour
 
     [SerializeField] private bool playing = false;
 
-    //The previous beat count as an integer to chec kif the beat changes
+    //The previous beat count as an integer to check if the beat changes
     private int prevBeat = 0;
 
     //Create OnBeatEvent
@@ -58,7 +58,6 @@ public class Conductor : MonoBehaviour
                 OnBeat();
             }
         }
-        
     }
 
     private void Play()
@@ -68,8 +67,8 @@ public class Conductor : MonoBehaviour
 
         //Reset variables
         prevBeat = 0;
-        songPosSec = 0;
-        songPosBeats = 0;
+        //songPosSec = 0;
+        //songPosBeats = 0;
 
         playing = true;
     }
