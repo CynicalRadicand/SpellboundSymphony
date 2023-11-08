@@ -71,6 +71,9 @@ public class Conductor : MonoBehaviour
         //songPosBeats = 0;
 
         playing = true;
+
+        //Invoke for first beat
+        OnBeat();
     }
 
     //Detects when the beat ticks over
