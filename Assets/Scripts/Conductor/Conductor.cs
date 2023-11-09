@@ -11,19 +11,20 @@ public class Conductor : MonoBehaviour
     public float songBpm;
 
     //The number of seconds for each song beat
-    [SerializeField] private float secPerBeat;
+    [SerializeField] private float secPerBeat = 0;
 
     //Current song position, in seconds
-    [SerializeField] private float songPositionInSec;
+    [SerializeField] private float songPosSec = 0;
 
     //Current song position, in beats
-    [SerializeField] private float songPositionInBeats;
+    [SerializeField] private float songPosBeats = 0;
 
     //Audio system based start time (more accurate to music)
-    [SerializeField] private float dspSongStartTime;
+    [SerializeField] private float startTime = 0;
 
-    //an AudioSource attached to this GameObject that will play the music.
-    public AudioSource musicSource;
+    [SerializeField] private AudioManager audioManager;
+
+    [SerializeField] private bool playing = false;
 
     //The previous beat count as an integer to chec kif the beat changes
     private int prevBeat = 0;
@@ -34,34 +35,43 @@ public class Conductor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Load the AudioSource attached to the Conductor GameObject
-        musicSource = GetComponent<AudioSource>();
-
-        musicSource.loop = true;
+        audioManager.onPlayEvent.AddListener(Play);
 
         //Calculate the number of seconds in each beat
         secPerBeat = 60f / songBpm;
 
-        //Record the time when the music starts
-        dspSongStartTime = (float)AudioSettings.dspTime;
-
-        //Start the music
-        musicSource.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //determine how many seconds since the song started
-        songPositionInSec = (float)(AudioSettings.dspTime - dspSongStartTime);
-
-        //determine how many beats since the song started
-        songPositionInBeats = songPositionInSec / secPerBeat;
-
-        if (TickOver(songPositionInBeats))
+        if (playing)
         {
-            OnBeat();
+            //determine how many seconds since the song started
+            songPosSec = (float)(AudioSettings.dspTime - startTime);
+
+            //determine how many beats since the song started
+            songPosBeats = songPosSec / secPerBeat;
+
+            if (TickOver(songPosBeats))
+            {
+                OnBeat();
+            }
         }
+        
+    }
+
+    private void Play()
+    {
+        //Record the time when the music starts
+        startTime = audioManager.startTimeSec;
+
+        //Reset variables
+        prevBeat = 0;
+        songPosSec = 0;
+        songPosBeats = 0;
+
+        playing = true;
     }
 
     //Detects when the beat ticks over
@@ -81,11 +91,11 @@ public class Conductor : MonoBehaviour
     private void OnBeat()
     {
         //Evoke the OnBeatEvent to subscribers
-        onBeatEvent?.Invoke(songPositionInSec);
+        onBeatEvent?.Invoke(songPosSec);
     }
 
     public float GetPosInBeat()
     {
-        return songPositionInBeats;
+        return songPosBeats;
     }
 }
