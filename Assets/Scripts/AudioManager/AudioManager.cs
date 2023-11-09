@@ -25,12 +25,12 @@ public class AudioManager : MonoBehaviour
 
     public void Play()
     {
-        onPlayEvent.Invoke();
-
         //Start the music
         musicSource.Play();
 
         //Record the time when the music starts
         startTimeSec = (float)AudioSettings.dspTime;
+
+        onPlayEvent.Invoke();
     }
 }
