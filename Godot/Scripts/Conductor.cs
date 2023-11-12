@@ -15,9 +15,9 @@ public partial class Conductor : AudioStreamPlayer2D
 
     [Export] private int songPosBeats = 0;
 
-    [Export] private int lastReportedBeat = 0;
+    [Export] private int lastReportedBeat = -1;
 
-    [Export] private int measure = 1;
+    [Export] private int measure = 0;
 
     [Export] private bool casting = false;
 

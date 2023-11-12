@@ -14,7 +14,6 @@ public partial class BorderFade : NinePatchRect
 
 	public void SetAlpha(double beat)
 	{
-		GD.Print("SIGNAL");
 		float alpha = (float)(1 - (beat % 1));
 		Modulate = new Color(1, 1, 1, alpha);
 	}
