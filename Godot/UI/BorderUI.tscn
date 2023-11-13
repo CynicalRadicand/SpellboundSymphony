@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c83g74pu0enu7"]
+
+[ext_resource type="Texture2D" uid="uid://cpw5cajku313v" path="res://UI/ElementBorder.png" id="1_du5fr"]
+[ext_resource type="Script" path="res://UI/BorderFade.cs" id="2_vnaay"]
+
+[node name="BorderUI" type="CanvasLayer"]
+
+[node name="Border" type="NinePatchRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_du5fr")
+draw_center = false
+region_rect = Rect2(12, 12, 1055, 1056)
+patch_margin_left = 70
+patch_margin_top = 70
+patch_margin_right = 70
+patch_margin_bottom = 70
+script = ExtResource("2_vnaay")
