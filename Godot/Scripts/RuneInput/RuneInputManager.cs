@@ -3,7 +3,7 @@ using System;
 
 public partial class RuneInputManager : Node
 {
-	[Export] private NodePath storePresenterPath = null;
+	[Export] private NodePath storePresenterPath;
 	RuneStorePresenter storePresenter;
 
 	// Called when the node enters the scene tree for the first time.
