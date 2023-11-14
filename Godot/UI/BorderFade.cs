@@ -7,6 +7,7 @@ public partial class BorderFade : NinePatchRect
 	[Export] private NodePath conductorPath;
 	private double beat;
 
+
 	public override void _Ready()
 	{
 		var conductor = GetNode<Conductor>(conductorPath);
