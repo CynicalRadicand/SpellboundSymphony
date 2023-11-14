@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://lcyb4v623r30"]
+[gd_scene load_steps=5 format=3 uid="uid://lcyb4v623r30"]
 
 [ext_resource type="PackedScene" uid="uid://c83g74pu0enu7" path="res://UI/BorderUI.tscn" id="1_p6iev"]
 [ext_resource type="Script" path="res://Scripts/Conductor.cs" id="2_46cye"]
 [ext_resource type="AudioStream" uid="uid://c30qw5r2r8bii" path="res://Music/metro_140bpm_5min.mp3" id="2_lup10"]
+[ext_resource type="PackedScene" uid="uid://cgjj0uftexwed" path="res://Templates/RuneInput.tscn" id="4_wrgrc"]
 
 [node name="Main" type="Node2D"]
 
@@ -13,5 +14,7 @@ stream = ExtResource("2_lup10")
 autoplay = true
 script = ExtResource("2_46cye")
 bpm = 140
+
+[node name="RuneInput" parent="." instance=ExtResource("4_wrgrc")]
 
 [editable path="BorderUI"]

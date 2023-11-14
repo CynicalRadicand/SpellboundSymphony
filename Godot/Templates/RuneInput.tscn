@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgjj0uftexwed"]
+
+[ext_resource type="Script" path="res://Scripts/RuneInput/RuneInputManager.cs" id="1_b3kuu"]
+[ext_resource type="Script" path="res://Scripts/RuneInput/RuneStoreManagement/RuneStoreController.cs" id="2_rtbiv"]
+[ext_resource type="Script" path="res://Scripts/RuneInput/RuneStoreManagement/RuneStorePresenter.cs" id="3_7cs6c"]
+[ext_resource type="Script" path="res://Scripts/RuneInput/RuneStoreManagement/RuneStoreView.cs" id="4_0wo8t"]
+[ext_resource type="Script" path="res://Scripts/Spells/SpellCastManagement/SpellCastPresenter.cs" id="5_pk80u"]
+
+[node name="RuneInput" type="Node2D"]
+
+[node name="RuneInputManager" type="Node" parent="."]
+script = ExtResource("1_b3kuu")
+storePresenterPath = NodePath("../RuneStoreManager")
+
+[node name="RuneStoreManager" type="Node" parent="."]
+script = ExtResource("3_7cs6c")
+spellCastPresenterPath = NodePath("../SpellCastManager")
+
+[node name="RuneStoreController" type="Node" parent="RuneStoreManager"]
+script = ExtResource("2_rtbiv")
+
+[node name="RuneStoreView" type="Node" parent="RuneStoreManager"]
+script = ExtResource("4_0wo8t")
+
+[node name="SpellCastManager" type="Node" parent="."]
+script = ExtResource("5_pk80u")
