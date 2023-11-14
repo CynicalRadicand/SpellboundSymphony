@@ -4,6 +4,9 @@ using System.Collections.Generic;
 public partial class RuneStorePresenter : Node
 {
     [Export] private NodePath spellCastPresenterPath;
+    [Export] private NodePath timingManagerPath;
+
+    private TimingManager timingManager;
 
     RuneStoreView storeView;
     RuneStoreController storeController;
@@ -14,10 +17,14 @@ public partial class RuneStorePresenter : Node
         storeView = GetNode<RuneStoreView>("RuneStoreView");
         storeController = GetNode<RuneStoreController>("RuneStoreController");
         spellCastPresenter = GetNode<SpellCastPresenter>(spellCastPresenterPath);
+
+        timingManager = GetNode<TimingManager>(timingManagerPath);
+        timingManager.TimingInput += HandleInput;
     }
 
     public void AddRune(Rune rune)
     {
+
         // TODO: replace with check from Conductor class
         bool isOnBeat = true;
 
@@ -64,5 +71,26 @@ public partial class RuneStorePresenter : Node
         storeView.ShowFailedCast("Spell casting was broken!");
 
         storeController.ClearQueue();
+    }
+
+    //TODO: add to signal listener
+    private void HandleInput(InputDTO inputDTO)
+    {
+        if (inputDTO.KeyAction == Elements.AIR)
+        {
+            //AddRune(new Rune(Elements.AIR, "A"));
+        }
+        if (inputDTO.KeyAction == Elements.FIRE)
+        {
+            //AddRune(new Rune(Elements.FIRE, "F"));
+        }
+        if (inputDTO.KeyAction == Elements.EARTH)
+        {
+            //AddRune(new Rune(Elements.EARTH, "E"));
+        }
+        if (inputDTO.KeyAction == Elements.WATER)
+        {
+            //AddRune(new Rune(Elements.WATER, "W"));
+        }
     }
 }

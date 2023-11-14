@@ -10,7 +10,6 @@
 
 [node name="RuneInputManager" type="Node" parent="."]
 script = ExtResource("1_b3kuu")
-storePresenterPath = NodePath("../RuneStoreManager")
 
 [node name="RuneStoreManager" type="Node" parent="."]
 script = ExtResource("3_7cs6c")
