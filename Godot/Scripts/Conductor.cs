@@ -7,7 +7,7 @@ public partial class Conductor : AudioStreamPlayer2D
 {
     [Export] public int bpm;
 
-    private int measures = 4;
+    private const int BEATNUMS = 4;
 
     [Export] private double secPerBeat = 0;
 
@@ -17,7 +17,7 @@ public partial class Conductor : AudioStreamPlayer2D
 
     [Export] private int lastReportedBeat = -1;
 
-    [Export] private int measure = 0;
+    [Export] private int beatNum = 0;
 
     [Export] private bool casting = false;
 
@@ -59,11 +59,11 @@ public partial class Conductor : AudioStreamPlayer2D
     {
         if (lastReportedBeat < songPosBeats)
         {
-            measure++;
-            if (measure > measures)
+            beatNum++;
+            if (beatNum > BEATNUMS)
             {
                 casting = !casting;
-                measure = 1;
+                beatNum = 1;
             }
             EmitSignal(SignalName.Beat, songPosBeats);
             lastReportedBeat = songPosBeats;

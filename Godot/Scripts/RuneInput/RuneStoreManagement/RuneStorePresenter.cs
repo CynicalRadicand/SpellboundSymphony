@@ -18,6 +18,7 @@ public partial class RuneStorePresenter : Node
 
     public void AddRune(Rune rune)
     {
+
         // TODO: replace with check from Conductor class
         bool isOnBeat = true;
 
@@ -64,5 +65,26 @@ public partial class RuneStorePresenter : Node
         storeView.ShowFailedCast("Spell casting was broken!");
 
         storeController.ClearQueue();
+    }
+
+    //TODO: add to signal listener
+    private void HandleInput(InputDTO inputDTO)
+    {
+        if (Input.IsActionJustPressed("RuneAir"))
+        {
+            AddRune(new Rune(Elements.AIR, "A"));
+        }
+        if (Input.IsActionJustPressed("RuneFire"))
+        {
+            AddRune(new Rune(Elements.FIRE, "F"));
+        }
+        if (Input.IsActionJustPressed("RuneEarth"))
+        {
+            AddRune(new Rune(Elements.EARTH, "E"));
+        }
+        if (Input.IsActionJustPressed("RuneWater"))
+        {
+            AddRune(new Rune(Elements.WATER, "W"));
+        }
     }
 }
