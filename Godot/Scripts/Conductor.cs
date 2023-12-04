@@ -27,6 +27,8 @@ public partial class Conductor : AudioStreamPlayer2D
 
     [Signal] public delegate void FadeEventHandler(double beat);
 
+    [Signal] public delegate void BeatEventHandler(int beatNum, bool casting);
+
     [Signal] public delegate void ConductorInputEventHandler(InputDTO inputDTO, double inputSec, double beatSec);
 
 
@@ -73,6 +75,7 @@ public partial class Conductor : AudioStreamPlayer2D
             lastReportedBeat = songPosBeatsInt;
             lastReportedSec = songPosSec;
 
+            EmitSignal(SignalName.Beat, songPosBeatsInt, casting);
         }
     }
 
