@@ -17,7 +17,7 @@ public class RuneSequence
             if (this.runes[i] == null)
             {
                 // FIXME: probably need a better way to get template runes
-                this.runes[i] = new Rune(Elements.NONE, " ");
+                this.runes[i] = new Rune(Elements.EMPTY, " ", Accuracy.EMPTY);
             }
         }
     }

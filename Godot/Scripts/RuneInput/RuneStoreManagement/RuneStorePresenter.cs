@@ -78,19 +78,19 @@ public partial class RuneStorePresenter : Node
     {
         if (inputDTO.KeyAction == Elements.AIR)
         {
-            //AddRune(new Rune(Elements.AIR, "A"));
+            AddRune(new Rune(Elements.AIR, "A", inputDTO.Accuracy));
         }
         if (inputDTO.KeyAction == Elements.FIRE)
         {
-            //AddRune(new Rune(Elements.FIRE, "F"));
+            AddRune(new Rune(Elements.FIRE, "F", inputDTO.Accuracy));
         }
         if (inputDTO.KeyAction == Elements.EARTH)
         {
-            //AddRune(new Rune(Elements.EARTH, "E"));
+            AddRune(new Rune(Elements.EARTH, "E", inputDTO.Accuracy));
         }
         if (inputDTO.KeyAction == Elements.WATER)
         {
-            //AddRune(new Rune(Elements.WATER, "W"));
+            AddRune(new Rune(Elements.WATER, "W", inputDTO.Accuracy));
         }
     }
 }

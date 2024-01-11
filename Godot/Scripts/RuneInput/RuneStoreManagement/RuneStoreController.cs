@@ -6,6 +6,7 @@ using System.Collections.Generic;
 /// </summary>
 public partial class RuneStoreController : Node
 {
+    // TODO: change to array with four slots, as we may attempt to slot into the same slot.
     private List<Rune> runes;
 
     // Called when the node enters the scene tree for the first time.
