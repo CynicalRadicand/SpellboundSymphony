@@ -1,7 +1,4 @@
-using Godot;
-using System;
-
-public partial class ElementalResist : GodotObject
+public class ElementalResist
 {
     public double water { get; set; }
     public double air { get; set; }
