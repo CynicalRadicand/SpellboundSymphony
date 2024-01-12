@@ -34,6 +34,7 @@ public abstract partial class enemyInterface : Node
 
     private void CountDown(int beatNum, bool playerCasting)
     {
+        //TODO: Test logic with dummy variables
         if (delay == 0)
         {
             telegraph--;
@@ -67,7 +68,7 @@ public abstract partial class enemyInterface : Node
         {
             if ((rand -= ability.chance) < 0)
             {
-                storedAbility = moveSet[abilityID]
+                storedAbility = moveSet[abilityID];
                 SetTelegraph(storedAbility);
                 break;
             }
@@ -80,6 +81,7 @@ public abstract partial class enemyInterface : Node
 
     private void SetTelegraph(Ability storedAbility)
     {
+        // Telegraph should always be between 1-8 beats
         telegraph = storedAbility.telegraph + 4;
         delay = 12 - telegraph;
     }
