@@ -32,6 +32,7 @@ conductorPath = NodePath("../Conductor")
 
 [node name="Enemy" type="Node" parent="."]
 script = ExtResource("6_kajc6")
+conductorPath = NodePath("../Conductor")
 
 [editable path="BorderUI"]
 [editable path="RuneInput"]

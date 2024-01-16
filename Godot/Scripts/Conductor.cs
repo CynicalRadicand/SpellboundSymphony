@@ -75,7 +75,7 @@ public partial class Conductor : AudioStreamPlayer2D
             lastReportedBeat = songPosBeatsInt;
             lastReportedSec = songPosSec;
 
-            EmitSignal(SignalName.Beat, songPosBeatsInt, casting);
+            EmitSignal(SignalName.Beat, beatNum, casting);
         }
     }
 
