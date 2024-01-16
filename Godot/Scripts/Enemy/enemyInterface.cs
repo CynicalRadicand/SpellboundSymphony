@@ -26,17 +26,27 @@ public partial class enemyInterface : Node
 
         // Dummy Moveset
         Ability ability1 = new Ability();
-        ability1.name = "ability1";
+        ability1.name = "Telegraph 5";
         ability1.telegraph = 1;
 
         Ability ability2 = new Ability();
-        ability2.name = "ability2";
-        ability2.telegraph = 8;
+        ability2.name = "Telegraph 8";
+        ability2.telegraph = 4;
+
+        Ability ability3 = new Ability();
+        ability3.name = "Telegraph 10";
+        ability3.telegraph = 6;
+
+        Ability ability4 = new Ability();
+        ability4.name = "Telegraph 12";
+        ability4.telegraph = 8;
 
         moveSet = new List<Ability>
         {
             ability1,
-            ability2
+            ability2,
+            ability3,
+            ability4,
         };
 
 
@@ -66,12 +76,11 @@ public partial class enemyInterface : Node
         if (delay == 0 && telegraph > 0)
         {
             TriggerTelegraph();
-            GD.Print("TELEGRAPHING");
         }
         else if (delay <= 0 && telegraph == 0)
         {
             TriggerAbility();
-            GD.Print("CASTING: " + storedAbility.name);
+            GD.Print("CASTING ON BEAT NUM: " + beatNum);
         }
         else if (beatNum == 1 && !playerCasting && delay < 0 && telegraph < 0)
         {
@@ -107,16 +116,24 @@ public partial class enemyInterface : Node
         // Telegraph should always be between 1-8 beats
         telegraph = storedAbility.telegraph + 4;
         delay = 12 - telegraph;
+        
         GD.Print("STORED: " + storedAbility.name);
+
+        // edge case where the telegraph should begin on the same beat
+        if (telegraph == 12) { TriggerTelegraph(); }
     }
 
     private void TriggerTelegraph()
     {
         //TODO: play animation
+
+        GD.Print("TELEGRAPHING");
     }
 
     private void TriggerAbility()
     {
         //TODO: emit signal to combat manager
+
+        GD.Print("CASTING: " + storedAbility.name);
     }
 }
