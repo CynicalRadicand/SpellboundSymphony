@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-public partial class enemyInterface : Node
+public partial class Enemy : Node
 {
     private string name;
     private int hp;
