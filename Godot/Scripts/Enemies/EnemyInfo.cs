@@ -8,14 +8,28 @@ public class EnemyInfo : JsonSerializable
 {
     public string name { get; set; }
     public int hp { get; set; }
-    public Position pos { get; set; }
-    public ElementalResist eRes { get; set; }
+    public Position idlePosition { get; set; }
+    public ElementalResist resistanceMultipliers { get; set; }
+    public override string ToString()
+    {
+        return $@"
+        Enemy: {name}
+        - HP: {hp}
+        - Idle position: {idlePosition}
+        
+        Resistance multiplers: 
+        - Air: {resistanceMultipliers.air}
+        - Fire: {resistanceMultipliers.fire}
+        - Earth: {resistanceMultipliers.earth}
+        - Water: {resistanceMultipliers.water}
+        ";
+    }
     public override string Serialize()
     {
-        throw new System.NotImplementedException();
+        return JsonSerializer.Serialize(this);
     }
-    public static AbilityInfo Deserialize(string filename)
+    public static EnemyInfo Deserialize(string filename)
     {
-        return JsonSerializer.Deserialize<AbilityInfo>(filename);
+        return JsonSerializer.Deserialize<EnemyInfo>(filename);
     }
 }

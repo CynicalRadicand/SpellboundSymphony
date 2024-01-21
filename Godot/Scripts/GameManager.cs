@@ -16,6 +16,15 @@ public partial class GameManager : Node
         // Test loading
 
 
+        Test_EnemyLoading();
+
+
+
+        // SetFirstScene();
+    }
+
+    private void Test_AbilityLoading()
+    {
         string enemy = "OngoAndBongo";
         List<string> abilities = new List<string>
         {
@@ -26,12 +35,13 @@ public partial class GameManager : Node
 
         foreach (string ability in abilities)
         {
-            GD.Print(DataPreloader.GetAbilityConfig($"{enemy}/{ability}.json"));
+            GD.Print(DataPreloader.GetAbilityInfo($"{enemy}/{ability}.json"));
         }
+    }
 
-
-
-        // SetFirstScene();
+    private void Test_EnemyLoading()
+    {
+        GD.Print(DataPreloader.GetEnemyInfo("ongo-and-bongo.json"));
     }
 
     public static void ChangeScene(string scene)
