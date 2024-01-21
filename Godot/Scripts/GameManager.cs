@@ -13,7 +13,7 @@ public partial class GameManager : Node
     public override void _Ready()
     {
         // Test loading
-        GD.Print(DataPreloader.GetAbilityConfig("Config/Ability/testAbility.json"));
+        GD.Print(DataPreloader.GetAbilityConfig("testAbility.json"));
         // SetFirstScene();
     }
 

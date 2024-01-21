@@ -1,15 +1,11 @@
 {
   "name": "Brother's Brunch",
-  "chance": 0.1,
+  "chance": 1,
   "damage": 0,
   "heal": 50,
   "shield": 0,
   "statusIncoming": null,
   "statusOutgoing": null,
-  "target": {
-    "high": false,
-    "medium": false,
-    "low": false
-  },
+  "target": [],
   "telegraph": 2
 }
