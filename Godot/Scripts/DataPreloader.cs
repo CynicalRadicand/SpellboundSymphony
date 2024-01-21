@@ -25,6 +25,8 @@ public partial class DataPreloader : Node
 
         GD.Print(jsonString);
 
+        // TODO: more descriptive errors for when a field is invalid -- custom deserializers?
+
         return Ability.Deserialize(jsonString);
     }
 }

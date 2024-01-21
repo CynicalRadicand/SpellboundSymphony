@@ -1,0 +1,11 @@
+{
+  "name": "Brother's Brunch",
+  "chance": 1,
+  "damage": 0,
+  "heal": 50,
+  "shield": 0,
+  "statusIncoming": [],
+  "statusOutgoing": [],
+  "target": [],
+  "telegraph": 2
+}

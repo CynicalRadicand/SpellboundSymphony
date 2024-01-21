@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// Handles the game flow, such as preloading data, saving data, and switching scenes.
@@ -13,7 +14,23 @@ public partial class GameManager : Node
     public override void _Ready()
     {
         // Test loading
-        GD.Print(DataPreloader.GetAbilityConfig("testAbility.json"));
+
+
+        string enemy = "OngoAndBongo";
+        List<string> abilities = new List<string>
+        {
+            "b-and-o",
+            "brothers-brunch",
+            "ongos-onslaught"
+        };
+
+        foreach (string ability in abilities)
+        {
+            GD.Print(DataPreloader.GetAbilityConfig($"{enemy}/{ability}.json"));
+        }
+
+
+
         // SetFirstScene();
     }
 

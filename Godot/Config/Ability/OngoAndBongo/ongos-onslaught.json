@@ -1,0 +1,11 @@
+{
+  "name": "Ongo's Onslaught",
+  "chance": 4,
+  "damage": 100,
+  "heal": 0,
+  "shield": 0,
+  "statusIncoming": [],
+  "statusOutgoing": [],
+  "target": [1],
+  "telegraph": 4
+}

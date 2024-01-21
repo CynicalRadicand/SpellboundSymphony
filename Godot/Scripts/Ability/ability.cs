@@ -37,7 +37,7 @@ public class Ability : JsonSerializable
 
     private string ListToString<T>(List<T> list)
     {
-        if (list == null)
+        if (list == null || list.Count == 0)
         {
             return "(Empty)";
         }
