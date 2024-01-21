@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
 
-public class Ability
+public class Ability : JsonSerializable
 {
     public string name { get; set; }
     // public AbilityType type { get; set; }
@@ -14,4 +15,13 @@ public class Ability
     public List<StatusEffect> statusOutgoing { get; set; } = new List<StatusEffect>();
     public List<Position> target { get; set; } = new List<Position>();
     public int telegraph { get; set; } = 1;
+
+    public override string Serialize()
+    {
+        return JsonSerializer.Serialize(this);
+    }
+    public static Ability Deserialize(string filename)
+    {
+        return JsonSerializer.Deserialize<Ability>(filename);
+    }
 }
