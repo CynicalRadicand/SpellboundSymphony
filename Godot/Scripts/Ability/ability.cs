@@ -16,6 +16,40 @@ public class Ability : JsonSerializable
     public List<Position> target { get; set; } = new List<Position>();
     public int telegraph { get; set; } = 1;
 
+    public override string ToString()
+    {
+        return $@"
+        Ability: {name}
+        - Chance: {chance}
+        - Damage: {damage}
+        - Heal: {heal}
+        - Shield: {shield}
+
+        Statuses:
+        - Incoming: {ListToString(statusIncoming)}
+        - Outgoing: {ListToString(statusOutgoing)}
+
+        Targets: {ListToString(target)}
+
+        - Telegraph: {telegraph}
+        ";
+    }
+
+    private string ListToString<T>(List<T> list)
+    {
+        if (list == null)
+        {
+            return "(Empty)";
+        }
+
+        string outString = "";
+        foreach (var item in list)
+        {
+            outString += $"[{item}]";
+        }
+        return outString;
+    }
+
     public override string Serialize()
     {
         return JsonSerializer.Serialize(this);

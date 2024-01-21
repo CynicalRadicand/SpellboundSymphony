@@ -4,8 +4,17 @@
   "damage": 0,
   "heal": 50,
   "shield": 0,
-  "statusIncoming": null,
+  "statusIncoming": [
+    {
+      "status": 1,
+      "duration": 4
+    },
+    {
+      "status": 8,
+      "duration": 2
+    }
+  ],
   "statusOutgoing": null,
-  "target": [],
+  "target": [0, 1],
   "telegraph": 2
 }
