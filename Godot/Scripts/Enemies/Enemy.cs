@@ -116,7 +116,7 @@ public partial class Enemy : Node
         // Telegraph should always be between 1-8 beats
         telegraph = storedAbility.telegraph + 4;
         delay = 12 - telegraph;
-        
+
         GD.Print("STORED: " + storedAbility.name);
 
         // edge case where the telegraph should begin on the same beat

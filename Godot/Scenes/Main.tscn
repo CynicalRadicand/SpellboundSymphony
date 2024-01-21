@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://c30qw5r2r8bii" path="res://Music/metro_140bpm_5min.mp3" id="2_lup10"]
 [ext_resource type="PackedScene" uid="uid://cgjj0uftexwed" path="res://Templates/RuneInput.tscn" id="4_wrgrc"]
 [ext_resource type="Script" path="res://Scripts/Timing/TimingManager.cs" id="5_8gclr"]
-[ext_resource type="Script" path="res://Scripts/Enemy/enemy.cs" id="6_4cu00"]
+[ext_resource type="Script" path="res://Scripts/Enemies/Enemy.cs" id="6_ux2yp"]
 
 [node name="Main" type="Node2D"]
 
@@ -31,7 +31,7 @@ script = ExtResource("5_8gclr")
 conductorPath = NodePath("../Conductor")
 
 [node name="Enemy" type="Node" parent="."]
-script = ExtResource("6_4cu00")
+script = ExtResource("6_ux2yp")
 conductorPath = NodePath("../Conductor")
 
 [editable path="BorderUI"]
