@@ -10,7 +10,7 @@ public partial class DataPreloader : Node
     /// Use this method to load up the values for abilities before entering combat.
     /// </summary>
     /// <param name="filename"></param>
-    public static Ability GetAbilityConfig(string filename)
+    public static AbilityInfo GetAbilityConfig(string filename)
     {
         FileAccess file = FileAccess.Open(ABILITY_CONFIG_PATH + filename, FileAccess.ModeFlags.Read);
 
@@ -27,6 +27,6 @@ public partial class DataPreloader : Node
 
         // TODO: more descriptive errors for when a field is invalid -- custom deserializers?
 
-        return Ability.Deserialize(jsonString);
+        return AbilityInfo.Deserialize(jsonString);
     }
 }

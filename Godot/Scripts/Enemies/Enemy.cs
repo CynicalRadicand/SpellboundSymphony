@@ -5,13 +5,10 @@ using System.Runtime.CompilerServices;
 
 public partial class Enemy : Node
 {
-    private string name;
-    private int hp;
-    private Position pos;
-    private ElementalResist eRes;
-    private List<Ability> moveSet;
+    private EnemyInfo enemyInfo;
+    private List<AbilityInfo> moveSet;
     private int ratioTotal = 0;
-    private Ability storedAbility;
+    private AbilityInfo storedAbility;
 
     private int delay = 0;
     private int telegraph = 0;
@@ -25,23 +22,23 @@ public partial class Enemy : Node
         //TODO: load stats from JSON
 
         // Dummy Moveset
-        Ability ability1 = new Ability();
+        AbilityInfo ability1 = new AbilityInfo();
         ability1.name = "Telegraph 5";
         ability1.telegraph = 1;
 
-        Ability ability2 = new Ability();
+        AbilityInfo ability2 = new AbilityInfo();
         ability2.name = "Telegraph 8";
         ability2.telegraph = 4;
 
-        Ability ability3 = new Ability();
+        AbilityInfo ability3 = new AbilityInfo();
         ability3.name = "Telegraph 10";
         ability3.telegraph = 6;
 
-        Ability ability4 = new Ability();
+        AbilityInfo ability4 = new AbilityInfo();
         ability4.name = "Telegraph 12";
         ability4.telegraph = 8;
 
-        moveSet = new List<Ability>
+        moveSet = new List<AbilityInfo>
         {
             ability1,
             ability2,
@@ -51,7 +48,7 @@ public partial class Enemy : Node
 
 
 
-        foreach (Ability ability in moveSet)
+        foreach (AbilityInfo ability in moveSet)
         {
             ratioTotal += ability.chance;
         }
@@ -96,7 +93,7 @@ public partial class Enemy : Node
 
         int abilityID = 0;
 
-        foreach (Ability ability in moveSet)
+        foreach (AbilityInfo ability in moveSet)
         {
             if ((rand -= ability.chance) < 0)
             {
@@ -111,7 +108,7 @@ public partial class Enemy : Node
         }
     }
 
-    private void SetTelegraph(Ability storedAbility)
+    private void SetTelegraph(AbilityInfo storedAbility)
     {
         // Telegraph should always be between 1-8 beats
         telegraph = storedAbility.telegraph + 4;

@@ -2,7 +2,12 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
-public class Ability : JsonSerializable
+/// <summary>
+/// Stores information about player and enemy combat abilities.
+/// 
+/// Note: player abilities can ignore chance and telegraph.
+/// </summary>
+public class AbilityInfo : JsonSerializable
 {
     public string name { get; set; }
     // public AbilityType type { get; set; }
@@ -54,8 +59,8 @@ public class Ability : JsonSerializable
     {
         return JsonSerializer.Serialize(this);
     }
-    public static Ability Deserialize(string filename)
+    public static AbilityInfo Deserialize(string filename)
     {
-        return JsonSerializer.Deserialize<Ability>(filename);
+        return JsonSerializer.Deserialize<AbilityInfo>(filename);
     }
 }
