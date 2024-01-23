@@ -16,7 +16,8 @@ public partial class GameManager : Node
         // Test loading
 
 
-        Test_EnemyLoading();
+        Test_AbilityLoading();
+        // Test_EnemyLoading();
 
 
 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
+using Godot;
 
 /// <summary>
 /// </summary>
@@ -8,7 +9,7 @@ public class EnemyInfo : JsonSerializable
 {
     public string name { get; set; }
     public int hp { get; set; }
-    public Position idlePosition { get; set; }
+    public Vector2 idlePosition { get; set; }
     public ElementalResist resistanceMultipliers { get; set; }
     public override string ToString()
     {

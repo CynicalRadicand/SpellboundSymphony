@@ -7,5 +7,8 @@
   "statusIncoming": [],
   "statusOutgoing": [],
   "target": [],
-  "telegraph": 2
+  "targetZone": null,
+  "telegraph": 2,
+  "telegraphPosition": { "x": 2, "y": 1 },
+  "position": { "x": 2, "y": 1 }
 }
