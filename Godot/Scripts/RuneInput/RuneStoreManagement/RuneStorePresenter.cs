@@ -54,6 +54,7 @@ public partial class RuneStorePresenter : Node
         if (spell != null)
         {
             storeView.ShowSuccessfulCast(spell);
+            //TODO: send signal to player
         }
         else
         {
