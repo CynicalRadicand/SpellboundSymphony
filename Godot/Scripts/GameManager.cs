@@ -17,7 +17,7 @@ public partial class GameManager : Node
 
 
         Test_AbilityLoading();
-        Test_EnemyLoading();
+        //Test_EnemyLoading();
 
 
 
@@ -40,10 +40,10 @@ public partial class GameManager : Node
         }
     }
 
-    private void Test_EnemyLoading()
+    /**private void Test_EnemyLoading()
     {
         GD.Print(DataPreloader.GetEnemyInfo("ongo-and-bongo.json"));
-    }
+    }*/
 
     public static void ChangeScene(string scene)
     {

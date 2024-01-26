@@ -22,6 +22,7 @@ public partial class DataPreloader : Node
         return AbilityInfo.Deserialize(jsonString);
     }
 
+    /**
     public static EnemyInfo GetEnemyInfo(string filename)
     {
         string jsonString = GetFileAsString(ENEMY_CONFIG_PATH + filename);
@@ -29,6 +30,7 @@ public partial class DataPreloader : Node
 
         return EnemyInfo.Deserialize(jsonString);
     }
+    */
 
     private static string GetFileAsString(string filePath)
     {

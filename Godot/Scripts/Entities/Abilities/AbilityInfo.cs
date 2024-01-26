@@ -1,3 +1,4 @@
+using Godot;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
@@ -10,22 +11,19 @@ using System.Text.Json;
 public class AbilityInfo : JsonSerializable
 {
     public string name { get; set; }
-    // public AbilityType type { get; set; }
-    // public string description { get; set; }
-    public int chance { get; set; } = 1;
     public int damage { get; set; } = 0;
     public int heal { get; set; } = 0;
     public int shield { get; set; } = 0;
     public List<StatusEffect> statusIncoming { get; set; } = new List<StatusEffect>();
     public List<StatusEffect> statusOutgoing { get; set; } = new List<StatusEffect>();
-    public List<Position> target { get; set; } = new List<Position>();
-    public int telegraph { get; set; } = 1;
+    public TargetZone targetZone { get; set; } = new TargetZone();
+
+    public Vector2 castingPosition { get; set; } = new Vector2(1, 1);
 
     public override string ToString()
     {
         return $@"
         Ability: {name}
-        - Chance: {chance}
         - Damage: {damage}
         - Heal: {heal}
         - Shield: {shield}
@@ -34,9 +32,7 @@ public class AbilityInfo : JsonSerializable
         - Incoming: {ListToString(statusIncoming)}
         - Outgoing: {ListToString(statusOutgoing)}
 
-        Targets: {ListToString(target)}
-
-        - Telegraph: {telegraph}
+        Targets: {targetZone}
         ";
     }
 
