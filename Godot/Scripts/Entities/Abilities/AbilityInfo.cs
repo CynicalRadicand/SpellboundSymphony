@@ -10,7 +10,6 @@ using System.Text.Json;
 /// </summary>
 public class AbilityInfo : JsonSerializable
 {
-    private static Vector2 DEFAULT_POSITION = new Vector2(1, 1);
     private static JsonSerializerOptions SERIALIZER_OPTIONS = new JsonSerializerOptions();
 
     public string name { get; set; }
@@ -20,7 +19,7 @@ public class AbilityInfo : JsonSerializable
     public List<StatusEffect> statusIncoming { get; set; } = new List<StatusEffect>();
     public List<StatusEffect> statusOutgoing { get; set; } = new List<StatusEffect>();
     public TargetZone targetZone { get; set; } = new TargetZone();
-    public Vector2 castingPosition { get; set; } = new Vector2(1, 1);
+    public Vector2 castingPosition { get; set; } = Entity.DEFAULT_POSITION;
 
     public AbilityInfo()
     {

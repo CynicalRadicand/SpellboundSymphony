@@ -12,5 +12,5 @@ public class EnemyAbilityInfo : AbilityInfo
 {
     public int chance { get; set; } = 1;
     public int telegraph { get; set; } = 1; //must be between 1-8
-    public Vector2 telegraphPosition { get; set; } = new Vector2(1, 1);
+    public Vector2 telegraphPosition { get; set; } = Entity.DEFAULT_POSITION;
 }
