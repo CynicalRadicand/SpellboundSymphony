@@ -3,12 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-public partial class Enemy : Node
+public partial class Enemy : Entity
 {
-    private EnemyInfo enemyInfo;
-    private List<AbilityInfo> moveSet;
+    private List<EnemyAbilityInfo> moveSet;
     private int ratioTotal = 0;
-    private AbilityInfo storedAbility;
+    private EnemyAbilityInfo storedAbility = null;
 
     private int delay = 0;
     private int telegraph = 0;
@@ -22,23 +21,23 @@ public partial class Enemy : Node
         //TODO: load stats from JSON
 
         // Dummy Moveset
-        AbilityInfo ability1 = new AbilityInfo();
+        EnemyAbilityInfo ability1 = new EnemyAbilityInfo();
         ability1.name = "Telegraph 5";
         ability1.telegraph = 1;
 
-        AbilityInfo ability2 = new AbilityInfo();
+        EnemyAbilityInfo ability2 = new EnemyAbilityInfo();
         ability2.name = "Telegraph 8";
         ability2.telegraph = 4;
 
-        AbilityInfo ability3 = new AbilityInfo();
+        EnemyAbilityInfo ability3 = new EnemyAbilityInfo();
         ability3.name = "Telegraph 10";
         ability3.telegraph = 6;
 
-        AbilityInfo ability4 = new AbilityInfo();
+        EnemyAbilityInfo ability4 = new EnemyAbilityInfo();
         ability4.name = "Telegraph 12";
         ability4.telegraph = 8;
 
-        moveSet = new List<AbilityInfo>
+        moveSet = new List<EnemyAbilityInfo>
         {
             ability1,
             ability2,
@@ -48,7 +47,7 @@ public partial class Enemy : Node
 
 
 
-        foreach (AbilityInfo ability in moveSet)
+        foreach (EnemyAbilityInfo ability in moveSet)
         {
             ratioTotal += ability.chance;
         }
@@ -58,7 +57,7 @@ public partial class Enemy : Node
 
     }
 
-    private void CountDown(int beatNum, bool playerCasting)
+    private void CountDown(int beatNum, bool casting)
     {
         //TODO: Test logic with dummy variables
         if (delay <= 0)
@@ -74,15 +73,22 @@ public partial class Enemy : Node
         {
             TriggerTelegraph();
         }
-        else if (delay <= 0 && telegraph == 0)
+        
+        if (delay <= 0 && telegraph == 0)
         {
             TriggerAbility();
             GD.Print("CASTING ON BEAT NUM: " + beatNum);
         }
-        else if (beatNum == 1 && !playerCasting && delay < 0 && telegraph < 0)
+        else if (beatNum == 1 && casting)
+        {
+            TriggerIdle();
+        }
+
+        if (beatNum == 1 && !casting && storedAbility == null)
         {
             AbilitySelect();
         }
+        
 
     }
 
@@ -93,7 +99,7 @@ public partial class Enemy : Node
 
         int abilityID = 0;
 
-        foreach (AbilityInfo ability in moveSet)
+        foreach (EnemyAbilityInfo ability in moveSet)
         {
             if ((rand -= ability.chance) < 0)
             {
@@ -108,7 +114,7 @@ public partial class Enemy : Node
         }
     }
 
-    private void SetTelegraph(AbilityInfo storedAbility)
+    private void SetTelegraph(EnemyAbilityInfo storedAbility)
     {
         // Telegraph should always be between 1-8 beats
         telegraph = storedAbility.telegraph + 4;
@@ -132,5 +138,14 @@ public partial class Enemy : Node
         //TODO: emit signal to combat manager
 
         GD.Print("CASTING: " + storedAbility.name);
+
+        storedAbility = null;
+    }
+
+    private void TriggerIdle()
+    {
+        //TODO: emit idle signal to combat manager
+
+        GD.Print("IDLE");
     }
 }
