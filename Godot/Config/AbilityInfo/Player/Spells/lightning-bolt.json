@@ -1,6 +1,6 @@
 {
   "name": "Lightning Bolt",
-  "damage": 0,
+  "damage": 10,
   "heal": 0,
   "shield": 0,
   "statusIncoming": [],

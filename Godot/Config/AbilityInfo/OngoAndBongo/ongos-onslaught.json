@@ -9,5 +9,5 @@
   "targetZone": [0, 0, 0, 0, 1, 2, 0, 1, 1],
   "telegraph": 4,
   "telegraphPosition": { "x": 1, "y": 1 },
-  "position": { "x": 0, "y": 0 }
+  "castingPosition": { "x": 0, "y": 0 }
 }
