@@ -1,0 +1,11 @@
+{
+  "name": "Lightning Bolt",
+  "damage": 0,
+  "heal": 0,
+  "shield": 0,
+  "statusIncoming": [],
+  "statusOutgoing": [],
+  "target": [],
+  "targetZone": [1, 1, 1, 0, 0, 0, 0, 0, 0],
+  "castingPosition": { "x": 1, "y": 0 }
+}

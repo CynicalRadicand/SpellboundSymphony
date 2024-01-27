@@ -11,11 +11,7 @@
       "duration": 2
     }
   ],
-  "targetZone": [
-    [1, 2, 2],
-    [0, 1, 2],
-    [0, 0, 0]
-  ],
+  "targetZone": [1, 2, 2, 0, 1, 2, 0, 0, 0],
   "telegraph": 6,
   "telegraphPosition": { "x": 0, "y": 1 },
   "position": { "x": 1, "y": 0 }
