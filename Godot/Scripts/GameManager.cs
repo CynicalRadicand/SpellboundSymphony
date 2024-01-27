@@ -13,37 +13,10 @@ public partial class GameManager : Node
 
     public override void _Ready()
     {
-        // Test loading
-
-
-        Test_AbilityLoading();
-        //Test_EnemyLoading();
-
-
+        TestRunner.RunTests();
 
         // SetFirstScene();
     }
-
-    private void Test_AbilityLoading()
-    {
-        string enemy = "OngoAndBongo";
-        List<string> abilities = new List<string>
-        {
-            "b-and-o",
-            "brothers-brunch",
-            "ongos-onslaught"
-        };
-
-        foreach (string ability in abilities)
-        {
-            GD.Print(DataPreloader.GetAbilityInfo($"{enemy}/{ability}.json"));
-        }
-    }
-
-    /**private void Test_EnemyLoading()
-    {
-        GD.Print(DataPreloader.GetEnemyInfo("ongo-and-bongo.json"));
-    }*/
 
     public static void ChangeScene(string scene)
     {

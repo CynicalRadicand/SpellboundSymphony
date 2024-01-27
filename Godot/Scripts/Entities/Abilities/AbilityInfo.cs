@@ -1,5 +1,8 @@
 using Godot;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
@@ -10,24 +13,25 @@ using System.Text.Json;
 /// </summary>
 public class AbilityInfo : JsonSerializable
 {
-    private static JsonSerializerOptions SERIALIZER_OPTIONS = new JsonSerializerOptions();
-
     public string name { get; set; }
     public int damage { get; set; } = 0;
     public int heal { get; set; } = 0;
     public int shield { get; set; } = 0;
     public List<StatusEffect> statusIncoming { get; set; } = new List<StatusEffect>();
     public List<StatusEffect> statusOutgoing { get; set; } = new List<StatusEffect>();
-    public TargetZone targetZone { get; set; } = new TargetZone();
+    public int[] targetZone { get; set; } = new int[9]; // TODO: replace with TargetZone abstraction
     public Vector2 castingPosition { get; set; } = Entity.DEFAULT_POSITION;
 
-    public AbilityInfo()
-    {
-        if (SERIALIZER_OPTIONS == null)
-        {
-            SERIALIZER_OPTIONS.Converters.Add(new TwoDimensionalIntArrayJsonConverter());
-        }
-    }
+    protected static List<string> REQUIRED_FIELDS = new() {
+        nameof(name),
+        nameof(damage),
+        nameof(heal),
+        nameof(shield),
+        nameof(statusIncoming),
+        nameof(statusOutgoing),
+        nameof(targetZone),
+        nameof(castingPosition)
+    };
 
     public override string ToString()
     {
@@ -40,8 +44,6 @@ public class AbilityInfo : JsonSerializable
         Statuses:
         - Incoming: {ListToString(statusIncoming)}
         - Outgoing: {ListToString(statusOutgoing)}
-
-        Targets: {targetZone}
         ";
     }
 
@@ -62,10 +64,11 @@ public class AbilityInfo : JsonSerializable
 
     public override string Serialize()
     {
-        return JsonSerializer.Serialize(this, SERIALIZER_OPTIONS);
+        return JsonSerializer.Serialize(this);
     }
+
     public static AbilityInfo Deserialize(string filename)
     {
-        return JsonSerializer.Deserialize<AbilityInfo>(filename, SERIALIZER_OPTIONS);
+        return JsonSerialisationUtils.Deserialize<AbilityInfo>(filename, REQUIRED_FIELDS);
     }
 }
