@@ -38,6 +38,7 @@ public class JsonSerialisationUtils
     public static T Deserialize<T>(string filename, List<string> requiredFields)
     {
         GD.Print($"Deserializing from {filename}");
+
         // Read the JSON file into a string
         string jsonText = GetFileAsString(filename);
 
@@ -54,8 +55,14 @@ public class JsonSerialisationUtils
         }
     }
 
+    /// <summary>
+    /// File path can use Godot special paths, such as "res" and "user"
+    /// </summary>
+    /// <param name="filePath"></param>
+    /// <returns></returns>
     private static string GetFileAsString(string filePath)
     {
+        // Note: must use Godot specific access (FileAccess) to utilise "res://" path
         FileAccess file = FileAccess.Open(filePath, FileAccess.ModeFlags.Read);
 
         if (file == null)

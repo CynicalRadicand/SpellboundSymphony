@@ -13,7 +13,7 @@ public class TestRunner
     }
     private static void Test_AbilityLoading()
     {
-        List<string> abilities = new List<string>
+        List<string> abilities = new()
         {
             "lightning-bolt"
         };
@@ -26,7 +26,7 @@ public class TestRunner
     private static void Test_EnemyAbilityLoading()
     {
         string enemy = "OngoAndBongo";
-        List<string> abilities = new List<string>
+        List<string> abilities = new()
         {
             "b-and-o",
             "brothers-brunch",

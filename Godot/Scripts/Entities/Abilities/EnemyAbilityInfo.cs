@@ -30,6 +30,7 @@ public class EnemyAbilityInfo : AbilityInfo
     public static new EnemyAbilityInfo Deserialize(string filename)
     {
         // TODO: range check for telegraph
+        // FIXME: need a better way to handle required fields across inherited members
         return JsonSerialisationUtils.Deserialize<EnemyAbilityInfo>(filename, REQUIRED_FIELDS.Concat(
             AbilityInfo.REQUIRED_FIELDS).ToList());
     }
