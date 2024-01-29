@@ -11,6 +11,7 @@ public partial class Player : Entity
     [Export] private NodePath conductorPath;
     private AbilityInfo storedAbility = null;
 
+    [Signal] public delegate void PlayerAbilityEventHandler(AbilityInfo ability);
 
     public override void _Ready()
     {
@@ -30,15 +31,14 @@ public partial class Player : Entity
 
     private void TriggerAbility()
     {
-        //TODO: emit signal to combat manager
         if (storedAbility != null)
         {
-            //TODO: emit signal to combat manager
+            EmitSignal(SignalName.PlayerAbility, storedAbility);
             storedAbility = null;
         }
         else
         {
-            //TODO: emit idle signal
+            EmitSignal(SignalName.PlayerAbility, null);
         }
         
     }

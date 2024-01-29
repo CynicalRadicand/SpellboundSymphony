@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://lcyb4v623r30"]
+
+[ext_resource type="PackedScene" uid="uid://c83g74pu0enu7" path="res://UI/BorderUI.tscn" id="1_au612"]
+[ext_resource type="PackedScene" uid="uid://cgjj0uftexwed" path="res://Templates/RuneInput.tscn" id="2_ln4v5"]
+[ext_resource type="Script" path="res://Scripts/Entities/Enemy.cs" id="3_qe4my"]
+[ext_resource type="Script" path="res://Scripts/Entities/Entity.cs" id="4_t0bc6"]
+[ext_resource type="Script" path="res://Scripts/Entities/Player.cs" id="5_b0ddo"]
+[ext_resource type="AudioStream" uid="uid://c30qw5r2r8bii" path="res://Music/metro_140bpm_5min.mp3" id="6_58pxx"]
+[ext_resource type="Script" path="res://Scripts/Timing/Conductor.cs" id="7_ogtw2"]
+[ext_resource type="Script" path="res://Scripts/Timing/TimingManager.cs" id="8_k677s"]
+[ext_resource type="Script" path="res://Scripts/Managers/CombatManager.cs" id="9_einc6"]
+
+[node name="CombatScene" type="Node2D"]
+
+[node name="BorderUI" parent="." instance=ExtResource("1_au612")]
+
+[node name="Border" parent="BorderUI" index="0" node_paths=PackedStringArray("conductor")]
+conductor = NodePath("../../Managers/Conductor")
+
+[node name="RuneInput" parent="." instance=ExtResource("2_ln4v5")]
+
+[node name="RuneStoreManager" parent="RuneInput" index="1"]
+timingManagerPath = NodePath("../../Managers/TimingManager")
+
+[node name="Enemy" type="Node" parent="."]
+script = ExtResource("3_qe4my")
+conductorPath = NodePath("../Managers/Conductor")
+
+[node name="EnemyStats" type="Node" parent="Enemy"]
+script = ExtResource("4_t0bc6")
+
+[node name="Player" type="Node" parent="."]
+script = ExtResource("5_b0ddo")
+conductorPath = NodePath("../Managers/Conductor")
+
+[node name="PlayerStats" type="Node" parent="Player"]
+script = ExtResource("4_t0bc6")
+
+[node name="Managers" type="Node" parent="."]
+
+[node name="Conductor" type="AudioStreamPlayer2D" parent="Managers"]
+stream = ExtResource("6_58pxx")
+autoplay = true
+script = ExtResource("7_ogtw2")
+bpm = 140
+runeInputManagerPath = NodePath("../../RuneInput/RuneInputManager")
+
+[node name="TimingManager" type="Node" parent="Managers"]
+script = ExtResource("8_k677s")
+conductorPath = NodePath("../Conductor")
+
+[node name="CombatManager" type="Node" parent="Managers" node_paths=PackedStringArray("player", "enemy", "playerStat", "enemyStat")]
+script = ExtResource("9_einc6")
+player = NodePath("../../Player")
+enemy = NodePath("../../Enemy")
+playerStat = NodePath("../../Player/PlayerStats")
+enemyStat = NodePath("../../Enemy/EnemyStats")
+
+[editable path="BorderUI"]
+[editable path="RuneInput"]

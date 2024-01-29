@@ -4,13 +4,12 @@ using System.Diagnostics;
 
 public partial class BorderFade : NinePatchRect
 {
-	[Export] private NodePath conductorPath;
+	[Export] private Conductor conductor;
 	private double beat;
 
 
 	public override void _Ready()
 	{
-		var conductor = GetNode<Conductor>(conductorPath);
 		conductor.Fade += SetAlpha;
 	}
 

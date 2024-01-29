@@ -15,6 +15,8 @@ public partial class Enemy : Entity
 
     [Export] private NodePath conductorPath;
 
+    [Signal] public delegate void EnemyAbilityEventHandler(EnemyAbilityInfo storedability);
+
 
     public override void _Ready()
     {
@@ -136,7 +138,7 @@ public partial class Enemy : Entity
     private void TriggerAbility()
     {
         //TODO: emit signal to combat manager
-
+        EmitSignal(SignalName.EnemyAbility, storedAbility);
         GD.Print("CASTING: " + storedAbility.name);
 
         storedAbility = null;
@@ -145,7 +147,7 @@ public partial class Enemy : Entity
     private void TriggerIdle()
     {
         //TODO: emit idle signal to combat manager
-
+        EmitSignal(SignalName.EnemyAbility, null);
         GD.Print("IDLE");
     }
 }
