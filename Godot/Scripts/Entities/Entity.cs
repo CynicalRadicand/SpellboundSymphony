@@ -1,11 +1,16 @@
 using System.Collections.Generic;
 using Godot;
-using Vector2 = Godot.Vector2;
 
 public partial class Entity : Node
 {
-    public string name;
-    public int hp;
-    public Vector2 position;
+    [Export] public string name;
+    [Export] public int hp;
     public List<StatusEffect> status;
+
+    [Export] protected Conductor conductor;
+
+    public override void _Ready()
+    {
+        
+    }
 }

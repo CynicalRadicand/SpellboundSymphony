@@ -12,11 +12,9 @@ public partial class Enemy : Entity
     private int delay = 0;
     private int telegraph = 0;
 
-
-    [Export] private NodePath conductorPath;
-
     [Signal] public delegate void EnemyAbilityEventHandler(EnemyAbilityInfo storedability);
 
+    [Export] protected AnimationNodeStateMachinePlayback animation;
 
     public override void _Ready()
     {
@@ -54,9 +52,9 @@ public partial class Enemy : Entity
             ratioTotal += ability.chance;
         }
 
-        var conductor = GetNode<Conductor>(conductorPath);
         conductor.Beat += CountDown;
 
+        animation = (AnimationNodeStateMachinePlayback)GetNode<AnimationTree>("AnimationTree").Get("parameters/playback");
     }
 
     private void CountDown(int beatNum, bool casting)
@@ -131,13 +129,14 @@ public partial class Enemy : Entity
     private void TriggerTelegraph()
     {
         //TODO: play animation
-
+        animation.Travel("telegraph");
         GD.Print("TELEGRAPHING");
     }
 
     private void TriggerAbility()
     {
         //TODO: emit signal to combat manager
+        animation.Travel("attack");
         EmitSignal(SignalName.EnemyAbility, storedAbility);
         GD.Print("CASTING: " + storedAbility.name);
 
