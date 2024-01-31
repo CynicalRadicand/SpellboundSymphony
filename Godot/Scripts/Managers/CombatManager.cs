@@ -19,8 +19,8 @@ public partial class CombatManager : Node
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
-        player.PlayerAbility += ProcessPlayerAbility;
-        enemy.EnemyAbility += ProcessEnemyAbility;
+        //player.PlayerAbility += ProcessPlayerAbility;
+        //enemy.EnemyAbility += ProcessEnemyAbility;
     }
 
 	private void ProcessPlayerAbility(AbilityInfo ability)

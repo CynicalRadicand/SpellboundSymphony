@@ -1,9 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://wbca2jol2rph"]
+[gd_scene load_steps=29 format=3 uid="uid://wbca2jol2rph"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Enemy.cs" id="1_mftpl"]
+[ext_resource type="Texture2D" uid="uid://cdechnhbaw8ce" path="res://Sprites/Blue_Slime/Dead.png" id="2_mgr5v"]
 [ext_resource type="Texture2D" uid="uid://d0t5i3i0722ce" path="res://Sprites/Blue_Slime/Idle.png" id="3_apw8o"]
 [ext_resource type="Texture2D" uid="uid://ddsf10iob34gh" path="res://Sprites/Blue_Slime/Attack_1.png" id="4_6yrpu"]
 [ext_resource type="Texture2D" uid="uid://boln52cg8tkfg" path="res://Sprites/Blue_Slime/Jump.png" id="4_wckwp"]
+[ext_resource type="Texture2D" uid="uid://da7lok2fmi5p4" path="res://Sprites/Blue_Slime/Attack_3.png" id="6_rj5na"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cd8ow"]
 radius = 10.943
@@ -29,38 +31,26 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:vframes")
+tracks/1/path = NodePath("Sprite2D:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [ExtResource("2_mgr5v")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/path = NodePath("Hurtbox:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [20]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
+"update": 0,
+"values": [Vector2(3, 49)]
 }
 
 [sub_resource type="Animation" id="Animation_2xygb"]
@@ -203,8 +193,61 @@ tracks/4/keys = {
 "values": [Vector2(3, 49)]
 }
 
+[sub_resource type="Animation" id="Animation_iw2xf"]
+resource_name = "projectiletelegraph"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_mgr5v")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
 [sub_resource type="Animation" id="Animation_fgr70"]
-resource_name = "telegraph"
+resource_name = "attacktelegraph"
 length = 1.3
 loop_mode = 1
 tracks/0/type = "value"
@@ -255,55 +298,139 @@ tracks/3/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hurtbox:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.7, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 54), Vector2(0, 54), Vector2(1, 24), Vector2(0, 54)]
+}
+
+[sub_resource type="Animation" id="Animation_dsx3s"]
+resource_name = "projectile"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_rj5na")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bogon"]
 _data = {
 "RESET": SubResource("Animation_54qsg"),
 "attack": SubResource("Animation_2xygb"),
+"attacktelegraph": SubResource("Animation_fgr70"),
 "idle": SubResource("Animation_3hel1"),
-"telegraph": SubResource("Animation_fgr70")
+"projectile": SubResource("Animation_dsx3s"),
+"projectiletelegraph": SubResource("Animation_iw2xf")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c2r77"]
 animation = &"attack"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ohmaw"]
+animation = &"attacktelegraph"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_loopy"]
 resource_name = "idle"
 animation = &"idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wody7"]
-animation = &"telegraph"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lyrku"]
+animation = &"projectile"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wq65r"]
+animation = &"projectiletelegraph"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_chwfp"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_24tau"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_icdca"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n4xsh"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_063ji"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hv0eo"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_slgv5"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qx8w7"]
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l2ghk"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_kpl5p"]
 states/End/position = Vector2(1007, 170)
 states/Start/position = Vector2(127, 170)
 states/attack/node = SubResource("AnimationNodeAnimation_c2r77")
-states/attack/position = Vector2(460, 77)
+states/attack/position = Vector2(506, 77)
+states/attacktelegraph/node = SubResource("AnimationNodeAnimation_ohmaw")
+states/attacktelegraph/position = Vector2(306, 77)
 states/idle/node = SubResource("AnimationNodeAnimation_loopy")
 states/idle/position = Vector2(306, 170)
-states/telegraph/node = SubResource("AnimationNodeAnimation_wody7")
-states/telegraph/position = Vector2(306, 77)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_chwfp"), "idle", "telegraph", SubResource("AnimationNodeStateMachineTransition_24tau"), "telegraph", "attack", SubResource("AnimationNodeStateMachineTransition_n4xsh"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_qx8w7")]
-graph_offset = Vector2(14, 18)
+states/projectile/node = SubResource("AnimationNodeAnimation_lyrku")
+states/projectile/position = Vector2(506, 266)
+states/projectiletelegraph/node = SubResource("AnimationNodeAnimation_wq65r")
+states/projectiletelegraph/position = Vector2(306, 266)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_chwfp"), "idle", "projectiletelegraph", SubResource("AnimationNodeStateMachineTransition_icdca"), "projectiletelegraph", "projectile", SubResource("AnimationNodeStateMachineTransition_063ji"), "projectile", "idle", SubResource("AnimationNodeStateMachineTransition_hv0eo"), "idle", "attacktelegraph", SubResource("AnimationNodeStateMachineTransition_slgv5"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_qx8w7"), "attacktelegraph", "attack", SubResource("AnimationNodeStateMachineTransition_l2ghk")]
+graph_offset = Vector2(-155, 3)
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_mftpl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(-1, 1)
-texture = ExtResource("3_apw8o")
-hframes = 20
+texture = ExtResource("2_mgr5v")
+hframes = 8
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -325,4 +452,3 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_kpl5p")
 anim_player = NodePath("../AnimationPlayer")
-active = true

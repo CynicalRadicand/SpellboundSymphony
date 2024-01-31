@@ -17,10 +17,6 @@ enabled = false
 [node name="BorderUI" parent="." instance=ExtResource("1_au612")]
 
 [node name="Border" parent="BorderUI" index="0" node_paths=PackedStringArray("conductor")]
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 5.0
-offset_bottom = 5.0
 conductor = NodePath("../../Managers/Conductor")
 
 [node name="RuneInput" parent="." instance=ExtResource("2_ln4v5")]
@@ -42,7 +38,7 @@ script = ExtResource("8_k677s")
 conductorPath = NodePath("../Conductor")
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("conductor") instance=ExtResource("9_dk046")]
-position = Vector2(907, 409)
+position = Vector2(913, 390)
 scale = Vector2(2, 2)
 conductor = NodePath("../Managers/Conductor")
 
