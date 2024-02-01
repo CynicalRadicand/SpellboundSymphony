@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://c42xg7wsfs0a1"]
+
+[ext_resource type="Script" path="res://Assets/Projectiles/Projectile.cs" id="1_u4mk7"]
+[ext_resource type="Texture2D" uid="uid://hwfv88p77ga5" path="res://Sprites/Blue_Slime/Run.png" id="2_dyl3q"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4ahl"]
+radius = 19.9995
+height = 63.9985
+
+[sub_resource type="Animation" id="Animation_0wcbn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_jhlbt"]
+resource_name = "fired"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8epfl"]
+_data = {
+"RESET": SubResource("Animation_0wcbn"),
+"fired": SubResource("Animation_jhlbt")
+}
+
+[node name="Projectile" type="Area2D" node_paths=PackedStringArray("notifier")]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_u4mk7")
+notifier = NodePath("VisibleOnScreenNotifier2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_dyl3q")
+offset = Vector2(6.94, -49.505)
+hframes = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.564
+shape = SubResource("CapsuleShape2D_g4ahl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "fired"
+libraries = {
+"": SubResource("AnimationLibrary_8epfl")
+}
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

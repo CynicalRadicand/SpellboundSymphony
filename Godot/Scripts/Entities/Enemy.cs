@@ -7,6 +7,7 @@ public partial class Enemy : Entity
     private List<EnemyAbilityInfo> moveSet;
     private int ratioTotal = 0;
     private EnemyAbilityInfo storedAbility = null;
+    private AbilityFactory factory;
 
     private int delay = 0;
     private int telegraph = 0;
@@ -19,11 +20,11 @@ public partial class Enemy : Entity
 
         // Dummy Moveset
         EnemyAbilityInfo attack = new EnemyAbilityInfo();
-        attack.name = "attack";
+        attack.name = "Attack";
         attack.telegraph = 4;
 
         EnemyAbilityInfo projectile = new EnemyAbilityInfo();
-        projectile.name = "projectile";
+        projectile.name = "Projectile";
         projectile.telegraph = 4;
 
         moveSet = new List<EnemyAbilityInfo>
@@ -43,6 +44,7 @@ public partial class Enemy : Entity
 
         animation = (AnimationNodeStateMachinePlayback)GetNode<AnimationTree>("AnimationTree").Get("parameters/playback");
         GetNode<AnimationTree>("AnimationTree").Active = true;
+        factory = GetNode<AbilityFactory>("AbilityFactory");
     }
 
     private void CountDown(int beatNum, bool casting)
@@ -101,8 +103,6 @@ public partial class Enemy : Entity
         telegraph = storedAbility.telegraph + 4;
         delay = 12 - telegraph;
 
-        GD.Print("STORED: " + storedAbility.name);
-
         // edge case where the telegraph should begin on the same beat
         if (telegraph == 12) { TriggerTelegraph(); }
     }
@@ -110,16 +110,13 @@ public partial class Enemy : Entity
     private void TriggerTelegraph()
     {
         //TODO: play animation
-        animation.Travel(storedAbility.name + "telegraph");
-        GD.Print("TELEGRAPHING");
+        animation.Travel(storedAbility.name + "Telegraph");
     }
 
     private void TriggerAbility()
     {
+        factory.GenerateAbility(storedAbility, "Player");
         animation.Travel(storedAbility.name);
-        //TODO: check for projectile, if it exists then spawn it
-        //TODO: 
-        GD.Print("CASTING: " + storedAbility.name);
 
         storedAbility = null;
     }
