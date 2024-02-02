@@ -1,8 +1,9 @@
-[gd_scene load_steps=30 format=3 uid="uid://wbca2jol2rph"]
+[gd_scene load_steps=31 format=3 uid="uid://wbca2jol2rph"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Enemy.cs" id="1_mftpl"]
 [ext_resource type="Script" path="res://Assets/Entities/AbilityFactory.cs" id="2_e1lce"]
 [ext_resource type="Texture2D" uid="uid://cdechnhbaw8ce" path="res://Sprites/Blue_Slime/Dead.png" id="2_mgr5v"]
+[ext_resource type="Script" path="res://Assets/Entities/HitBox.cs" id="3_6louj"]
 [ext_resource type="Texture2D" uid="uid://d0t5i3i0722ce" path="res://Sprites/Blue_Slime/Idle.png" id="3_apw8o"]
 [ext_resource type="Texture2D" uid="uid://ddsf10iob34gh" path="res://Sprites/Blue_Slime/Attack_1.png" id="4_6yrpu"]
 [ext_resource type="Texture2D" uid="uid://boln52cg8tkfg" path="res://Sprites/Blue_Slime/Jump.png" id="4_wckwp"]
@@ -423,9 +424,9 @@ states/Start/position = Vector2(127, 170)
 states/idle/node = SubResource("AnimationNodeAnimation_loopy")
 states/idle/position = Vector2(306, 170)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_chwfp"), "idle", "ProjectileTelegraph", SubResource("AnimationNodeStateMachineTransition_icdca"), "ProjectileTelegraph", "Projectile", SubResource("AnimationNodeStateMachineTransition_063ji"), "Projectile", "idle", SubResource("AnimationNodeStateMachineTransition_hv0eo"), "idle", "AttackTelegraph", SubResource("AnimationNodeStateMachineTransition_slgv5"), "Attack", "idle", SubResource("AnimationNodeStateMachineTransition_qx8w7"), "AttackTelegraph", "Attack", SubResource("AnimationNodeStateMachineTransition_l2ghk")]
-graph_offset = Vector2(-131, 51)
+graph_offset = Vector2(-130, 10)
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_mftpl")
 
 [node name="AbilityFactory" type="Node2D" parent="." node_paths=PackedStringArray("projectileSpawner")]
@@ -433,6 +434,7 @@ script = ExtResource("2_e1lce")
 projectileSpawner = NodePath("ProjectileSpawner")
 
 [node name="MeleeHitbox" type="Area2D" parent="AbilityFactory"]
+script = ExtResource("3_6louj")
 
 [node name="Hitbox" type="CollisionShape2D" parent="AbilityFactory/MeleeHitbox"]
 position = Vector2(-25, 42)
@@ -449,7 +451,7 @@ texture = ExtResource("2_mgr5v")
 hframes = 5
 frame = 3
 
-[node name="Hurtbox" type="CollisionShape2D" parent="." groups=["enemy"]]
+[node name="Hurtbox" type="CollisionShape2D" parent="."]
 position = Vector2(3, 49)
 shape = SubResource("CircleShape2D_drqg3")
 

@@ -48,6 +48,7 @@ _data = {
 [node name="Projectile" type="Area2D" node_paths=PackedStringArray("notifier")]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_u4mk7")
+speed = 500
 notifier = NodePath("VisibleOnScreenNotifier2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

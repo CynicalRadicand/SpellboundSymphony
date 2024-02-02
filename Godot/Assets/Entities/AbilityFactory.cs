@@ -4,9 +4,12 @@ using System;
 public partial class AbilityFactory : Node2D
 {
 	[Export] private Node2D projectileSpawner;
+	[Export] private HitBox meleeHitbox;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		meleeHitbox = GetNode<HitBox>("MeleeHitbox");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -16,15 +19,14 @@ public partial class AbilityFactory : Node2D
 
 	public void GenerateAbility(AbilityInfo ability, string target) {
 		//TODO: Damage Calculation
-		GD.Print("GENERATING ABILITY");
 		if (ResourceLoader.Exists("res://Assets/Projectiles/" + ability.name + ".tscn"))
 		{
 			SpawnProjectile(ability.name, 0, target);
-			GD.Print("PROJECTILE");
 		}
         else
         {
-            //TODO: change melee hitbox damage
+			//TODO: change melee hitbox damage
+			meleeHitbox.SetParams(0, target);
         }
     }
 
