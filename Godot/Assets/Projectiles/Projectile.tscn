@@ -67,3 +67,5 @@ libraries = {
 }
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(1.90735e-06, 0)
+scale = Vector2(3.6, 2.2)

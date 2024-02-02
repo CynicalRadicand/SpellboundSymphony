@@ -9,6 +9,8 @@ public partial class Projectile : HitBox
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        notifier = GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D");
+
         notifier.ScreenExited += Destroy;
 
         // Connect BodyEntered signal from HitBox
