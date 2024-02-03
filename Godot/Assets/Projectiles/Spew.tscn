@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c42xg7wsfs0a1"]
+[gd_scene load_steps=7 format=3 uid="uid://i5g7dfvlhjep"]
 
-[ext_resource type="Script" path="res://Assets/Projectiles/Projectile.cs" id="1_u4mk7"]
-[ext_resource type="Texture2D" uid="uid://hwfv88p77ga5" path="res://Sprites/Blue_Slime/Run.png" id="2_dyl3q"]
+[ext_resource type="Script" path="res://Assets/Projectiles/Projectile.cs" id="1_vqp8k"]
+[ext_resource type="Texture2D" uid="uid://bg6ykpe1geu16" path="res://Sprites/Blue_Slime/Hurt.png" id="2_qmgvx"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4ahl"]
-radius = 19.9995
-height = 63.9985
+[sub_resource type="CircleShape2D" id="CircleShape2D_lip2u"]
+radius = 59.4
 
 [sub_resource type="Animation" id="Animation_0wcbn"]
 length = 0.001
@@ -21,10 +20,22 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_jhlbt"]
 resource_name = "fired"
-length = 0.7
+length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -33,10 +44,22 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -6.28319]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8epfl"]
@@ -47,18 +70,19 @@ _data = {
 
 [node name="Projectile" type="Area2D" node_paths=PackedStringArray("notifier")]
 scale = Vector2(0.5, 0.5)
-script = ExtResource("1_u4mk7")
-speed = -500
+script = ExtResource("1_vqp8k")
+speed = -100
 notifier = NodePath("VisibleOnScreenNotifier2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_dyl3q")
-offset = Vector2(6.94, -49.505)
-hframes = 7
+scale = Vector2(2, 2)
+texture = ExtResource("2_qmgvx")
+offset = Vector2(-4.13, -49.505)
+hframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.564
-shape = SubResource("CapsuleShape2D_g4ahl")
+shape = SubResource("CircleShape2D_lip2u")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "fired"

@@ -21,16 +21,23 @@ public partial class Enemy : Entity
         // Dummy Moveset
         EnemyAbilityInfo attack = new EnemyAbilityInfo();
         attack.name = "Attack";
-        attack.telegraph = 4;
+        attack.telegraph = 6;
+        //attack.chance = 0;
 
         EnemyAbilityInfo projectile = new EnemyAbilityInfo();
         projectile.name = "Projectile";
         projectile.telegraph = 4;
+        //projectile.chance = 0;
+
+        EnemyAbilityInfo spew = new EnemyAbilityInfo();
+        spew.name = "Spew";
+        spew.telegraph = 2;
 
         moveSet = new List<EnemyAbilityInfo>
         {
             attack,
-            projectile
+            projectile,
+            spew
         };
 
 
@@ -44,6 +51,7 @@ public partial class Enemy : Entity
 
         animation = (AnimationNodeStateMachinePlayback)GetNode<AnimationTree>("AnimationTree").Get("parameters/playback");
         GetNode<AnimationTree>("AnimationTree").Active = true;
+
         factory = GetNode<AbilityFactory>("AbilityFactory");
     }
 
@@ -109,13 +117,13 @@ public partial class Enemy : Entity
 
     private void TriggerTelegraph()
     {
-        //TODO: play animation
         animation.Travel(storedAbility.name + "Telegraph");
     }
 
     private void TriggerAbility()
     {
         factory.GenerateAbility(storedAbility, "Player");
+
         animation.Travel(storedAbility.name);
 
         storedAbility = null;

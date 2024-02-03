@@ -23,7 +23,8 @@ public partial class Entity : Node2D
 
     public void Damage(int value)
     {
-
+        shield -= value;
+        hp -= value - shield;
     }
 
     public void Recover(int value)

@@ -3,7 +3,7 @@ using System;
 
 public partial class Projectile : HitBox
 {
-    [Export] private int speed = 1000;
+    [Export] private int speed = 0;
     [Export] private VisibleOnScreenNotifier2D notifier;
 
     // Called when the node enters the scene tree for the first time.
@@ -20,7 +20,7 @@ public partial class Projectile : HitBox
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(double delta)
     {
-        Vector2 direction = Vector2.Left.Rotated(Rotation);
+        Vector2 direction = Vector2.Right.Rotated(Rotation);
         GlobalPosition += speed * direction * (float)delta;
     }
 
