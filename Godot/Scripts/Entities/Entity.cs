@@ -3,7 +3,7 @@ using System.ComponentModel;
 using Godot;
 using System;
 
-public partial class Entity : Node2D
+public abstract partial class Entity : Node2D
 {
     [Export] public string name;
     [Export] public int hp;
@@ -14,7 +14,10 @@ public partial class Entity : Node2D
 
     [Export] protected Conductor conductor;
 
-    [Export] protected AnimationNodeStateMachinePlayback animation;
+    protected AnimationNodeStateMachinePlayback animation;
+
+
+    protected AbilityFactory factory;
 
     public override void _Ready()
     {

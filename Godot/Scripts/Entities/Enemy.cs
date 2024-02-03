@@ -7,12 +7,9 @@ public partial class Enemy : Entity
     private List<EnemyAbilityInfo> moveSet;
     private int ratioTotal = 0;
     private EnemyAbilityInfo storedAbility = null;
-    private AbilityFactory factory;
 
     private int delay = 0;
     private int telegraph = 0;
-
-    
 
     public override void _Ready()
     {
