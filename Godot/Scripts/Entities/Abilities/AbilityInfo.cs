@@ -8,7 +8,7 @@ using System.Text.Json;
 /// 
 /// Note: player abilities can ignore chance and telegraph.
 /// </summary>
-public class AbilityInfo : JsonSerializable
+public partial class AbilityInfo : GodotObject
 {
     public string name { get; set; }
     public int damage { get; set; } = 0;
@@ -51,12 +51,12 @@ public class AbilityInfo : JsonSerializable
         return outString;
     }
 
-    public override string Serialize()
+    /*public override string Serialize()
     {
         return JsonSerializer.Serialize(this);
     }
     public static AbilityInfo Deserialize(string filename)
     {
         return JsonSerializer.Deserialize<AbilityInfo>(filename);
-    }
+    }*/
 }

@@ -19,7 +19,8 @@ public partial class DataPreloader : Node
 
         // TODO: more descriptive errors for when a field is invalid -- custom deserializers?
 
-        return AbilityInfo.Deserialize(jsonString);
+        return null;
+            //AbilityInfo.Deserialize(jsonString);
     }
 
     /**
