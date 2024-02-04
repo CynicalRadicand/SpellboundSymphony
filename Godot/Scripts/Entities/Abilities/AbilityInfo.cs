@@ -16,9 +16,6 @@ public partial class AbilityInfo : GodotObject
     public int shield { get; set; } = 0;
     public List<StatusEffect> statusIncoming { get; set; } = new List<StatusEffect>();
     public List<StatusEffect> statusOutgoing { get; set; } = new List<StatusEffect>();
-    public TargetZone targetZone { get; set; } = new TargetZone();
-
-    public Vector2 castingPosition { get; set; } = new Vector2(1, 1);
 
     public override string ToString()
     {
@@ -32,7 +29,6 @@ public partial class AbilityInfo : GodotObject
         - Incoming: {ListToString(statusIncoming)}
         - Outgoing: {ListToString(statusOutgoing)}
 
-        Targets: {targetZone}
         ";
     }
 
