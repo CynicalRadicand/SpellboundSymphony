@@ -17,7 +17,7 @@ public class JsonSerialisationUtils
         File.WriteAllText(filePath, jsonString);
     }
 
-    public static bool IsValidatedJson(string jsonText, List<string> requiredFields)
+    public static bool HasRequiredFields(string jsonText, List<string> requiredFields)
     {
         // Deserialize JSON to a JsonDocument
         using JsonDocument doc = JsonDocument.Parse(jsonText);
@@ -45,7 +45,7 @@ public class JsonSerialisationUtils
         GD.Print(jsonText);
         try
         {
-            IsValidatedJson(jsonText, requiredFields);
+            HasRequiredFields(jsonText, requiredFields);
             return JsonSerializer.Deserialize<T>(jsonText);
         }
         catch

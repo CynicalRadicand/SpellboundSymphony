@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
@@ -22,6 +23,11 @@ public class EnemyAbilityInfo : AbilityInfo
         nameof(telegraphPosition),
     };
 
+    protected static List<IFieldValidator> FIELD_VALIDATORS = new() {
+        new FieldValidator<int>(nameof(chance), x => x > 0, "Greater than 0"),
+        new FieldValidator<int>(nameof(telegraph), x => x >= 1 && x <= 8, "Between 1 and 8 (inclusive)")
+    };
+
     // 'new' keyword to hide base method from AbilityInfo
     public new string Serialize()
     {
@@ -29,9 +35,29 @@ public class EnemyAbilityInfo : AbilityInfo
     }
     public static new EnemyAbilityInfo Deserialize(string filename)
     {
-        // TODO: range check for telegraph
+
         // FIXME: need a better way to handle required fields across inherited members
-        return JsonSerialisationUtils.Deserialize<EnemyAbilityInfo>(filename, REQUIRED_FIELDS.Concat(
+
+        EnemyAbilityInfo ability = JsonSerialisationUtils.Deserialize<EnemyAbilityInfo>(filename, REQUIRED_FIELDS.Concat(
             AbilityInfo.REQUIRED_FIELDS).ToList());
+
+        try
+        {
+            // TODO: range check for telegraph
+            // Get all fields of the MyClass type
+            FieldInfo[] fields = typeof(EnemyAbilityInfo).GetFields();
+
+            // Display information about each field
+            foreach (var field in fields)
+            {
+                Console.WriteLine($"Field Name: {field.Name}, Type: {field.FieldType}, Accessibility: {field.Attributes}");
+            }
+        }
+        catch
+        {
+            throw;
+        }
+
+        return ability;
     }
 }
