@@ -42,7 +42,7 @@ position = Vector2(894, 448)
 conductor = NodePath("../Managers/Conductor")
 
 [node name="Player" parent="." node_paths=PackedStringArray("conductor") instance=ExtResource("7_tiaps")]
-position = Vector2(182, 465)
+position = Vector2(222, 462)
 scale = Vector2(3, 3)
 conductor = NodePath("../Managers/Conductor")
 
