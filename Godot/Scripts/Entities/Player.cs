@@ -48,7 +48,7 @@ public partial class Player : Entity
             storedAbility = null;
         }
         else {
-            animation.Travel("Fizzle");
+            //animation.Travel("Fizzle");
         }
     }
 }
