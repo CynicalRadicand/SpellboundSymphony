@@ -11,7 +11,7 @@ using System.Text.Json;
 /// 
 /// Note: player abilities can ignore chance and telegraph.
 /// </summary>
-public class AbilityInfo : JsonSerializable
+public partial class AbilityInfo : GodotObject
 {
     public string name { get; set; }
     public int damage { get; set; } = 0;
@@ -19,19 +19,15 @@ public class AbilityInfo : JsonSerializable
     public int shield { get; set; } = 0;
     public List<StatusEffect> statusIncoming { get; set; } = new List<StatusEffect>();
     public List<StatusEffect> statusOutgoing { get; set; } = new List<StatusEffect>();
-    public int[] targetZone { get; set; } = new int[9]; // TODO: replace with TargetZone abstraction
-    public Vector2 castingPosition { get; set; } = Entity.DEFAULT_POSITION;
-
     protected static List<string> REQUIRED_FIELDS = new() {
         nameof(name),
         nameof(damage),
         nameof(heal),
         nameof(shield),
         nameof(statusIncoming),
-        nameof(statusOutgoing),
-        nameof(targetZone),
-        nameof(castingPosition)
+        nameof(statusOutgoing)
     };
+
 
     public override string ToString()
     {
@@ -62,7 +58,7 @@ public class AbilityInfo : JsonSerializable
         return outString;
     }
 
-    public override string Serialize()
+    /*public override string Serialize()
     {
         return JsonSerializer.Serialize(this);
     }
@@ -70,5 +66,5 @@ public class AbilityInfo : JsonSerializable
     public static AbilityInfo Deserialize(string filename)
     {
         return JsonSerialisationUtils.Deserialize<AbilityInfo>(filename, REQUIRED_FIELDS);
-    }
+    }*/
 }

@@ -1,13 +1,42 @@
 using System.Collections.Generic;
-using System.Numerics;
+using System.ComponentModel;
 using Godot;
-using Vector2 = Godot.Vector2;
+using System;
 
-public abstract partial class Entity : Node
+public abstract partial class Entity : Node2D
 {
-    public static Vector2 DEFAULT_POSITION = new Vector2(1, 1);
-    public int hp;
-    public string name;
-    public Vector2 position;
+    [Export] public string name;
+    [Export] public int hp;
+    [Export] public int shield;
     public List<StatusEffect> status;
+
+    public Vector2 defaultPosition;
+
+    [Export] protected Conductor conductor;
+
+    protected AnimationNodeStateMachinePlayback animation;
+
+
+    protected AbilityFactory factory;
+
+    public override void _Ready()
+    {
+        defaultPosition = Position;
+    }
+
+    public void Damage(int value)
+    {
+        shield -= value;
+        hp -= value - shield;
+    }
+
+    public void Recover(int value)
+    {
+
+    }
+
+    public void Shield(int value)
+    {
+
+    }
 }

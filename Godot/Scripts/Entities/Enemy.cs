@@ -1,7 +1,6 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 public partial class Enemy : Entity
 {
@@ -12,37 +11,30 @@ public partial class Enemy : Entity
     private int delay = 0;
     private int telegraph = 0;
 
-
-    [Export] private NodePath conductorPath;
-
-
     public override void _Ready()
     {
         //TODO: load stats from JSON
 
         // Dummy Moveset
-        EnemyAbilityInfo ability1 = new EnemyAbilityInfo();
-        ability1.name = "Telegraph 5";
-        ability1.telegraph = 1;
+        EnemyAbilityInfo attack = new EnemyAbilityInfo();
+        attack.name = "Attack";
+        attack.telegraph = 6;
+        //attack.chance = 0;
 
-        EnemyAbilityInfo ability2 = new EnemyAbilityInfo();
-        ability2.name = "Telegraph 8";
-        ability2.telegraph = 4;
+        EnemyAbilityInfo projectile = new EnemyAbilityInfo();
+        projectile.name = "Projectile";
+        projectile.telegraph = 4;
+        //projectile.chance = 0;
 
-        EnemyAbilityInfo ability3 = new EnemyAbilityInfo();
-        ability3.name = "Telegraph 10";
-        ability3.telegraph = 6;
-
-        EnemyAbilityInfo ability4 = new EnemyAbilityInfo();
-        ability4.name = "Telegraph 12";
-        ability4.telegraph = 8;
+        EnemyAbilityInfo spew = new EnemyAbilityInfo();
+        spew.name = "Spew";
+        spew.telegraph = 2;
 
         moveSet = new List<EnemyAbilityInfo>
         {
-            ability1,
-            ability2,
-            ability3,
-            ability4,
+            attack,
+            projectile,
+            spew
         };
 
 
@@ -52,9 +44,12 @@ public partial class Enemy : Entity
             ratioTotal += ability.chance;
         }
 
-        var conductor = GetNode<Conductor>(conductorPath);
         conductor.Beat += CountDown;
 
+        animation = (AnimationNodeStateMachinePlayback)GetNode<AnimationTree>("AnimationTree").Get("parameters/playback");
+        GetNode<AnimationTree>("AnimationTree").Active = true;
+
+        factory = GetNode<AbilityFactory>("AbilityFactory");
     }
 
     private void CountDown(int beatNum, bool casting)
@@ -67,8 +62,6 @@ public partial class Enemy : Entity
 
         delay--;
 
-        GD.Print("DELAY: " + delay + " TELEGRAPH: " + telegraph);
-
         if (delay == 0 && telegraph > 0)
         {
             TriggerTelegraph();
@@ -77,11 +70,6 @@ public partial class Enemy : Entity
         if (delay <= 0 && telegraph == 0)
         {
             TriggerAbility();
-            GD.Print("CASTING ON BEAT NUM: " + beatNum);
-        }
-        else if (beatNum == 1 && casting)
-        {
-            TriggerIdle();
         }
 
         if (beatNum == 1 && !casting && storedAbility == null)
@@ -120,32 +108,21 @@ public partial class Enemy : Entity
         telegraph = storedAbility.telegraph + 4;
         delay = 12 - telegraph;
 
-        GD.Print("STORED: " + storedAbility.name);
-
         // edge case where the telegraph should begin on the same beat
         if (telegraph == 12) { TriggerTelegraph(); }
     }
 
     private void TriggerTelegraph()
     {
-        //TODO: play animation
-
-        GD.Print("TELEGRAPHING");
+        animation.Travel(storedAbility.name + "Telegraph");
     }
 
     private void TriggerAbility()
     {
-        //TODO: emit signal to combat manager
+        factory.GenerateAbility(storedAbility, "Player");
 
-        GD.Print("CASTING: " + storedAbility.name);
+        animation.Travel(storedAbility.name);
 
         storedAbility = null;
-    }
-
-    private void TriggerIdle()
-    {
-        //TODO: emit idle signal to combat manager
-
-        GD.Print("IDLE");
     }
 }

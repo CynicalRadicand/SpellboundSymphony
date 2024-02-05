@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://lcyb4v623r30"]
+
+[ext_resource type="PackedScene" uid="uid://c83g74pu0enu7" path="res://UI/BorderUI.tscn" id="1_au612"]
+[ext_resource type="PackedScene" uid="uid://cgjj0uftexwed" path="res://Templates/RuneInput.tscn" id="2_ln4v5"]
+[ext_resource type="AudioStream" uid="uid://c30qw5r2r8bii" path="res://Music/metro_140bpm_5min.mp3" id="6_58pxx"]
+[ext_resource type="Script" path="res://Scripts/Timing/Conductor.cs" id="7_ogtw2"]
+[ext_resource type="PackedScene" uid="uid://5cwvymoljtmk" path="res://Assets/Entities/Player.tscn" id="7_tiaps"]
+[ext_resource type="Script" path="res://Scripts/Timing/TimingManager.cs" id="8_k677s"]
+[ext_resource type="PackedScene" uid="uid://wbca2jol2rph" path="res://Assets/Entities/Enemies/ExampleEnemy.tscn" id="9_dk046"]
+
+[node name="CombatScene" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+enabled = false
+
+[node name="BorderUI" parent="." instance=ExtResource("1_au612")]
+
+[node name="Border" parent="BorderUI" index="0" node_paths=PackedStringArray("conductor")]
+conductor = NodePath("../../Managers/Conductor")
+
+[node name="RuneInput" parent="." instance=ExtResource("2_ln4v5")]
+
+[node name="RuneStoreManager" parent="RuneInput" index="1"]
+timingManagerPath = NodePath("../../Managers/TimingManager")
+
+[node name="Managers" type="Node" parent="."]
+
+[node name="Conductor" type="AudioStreamPlayer2D" parent="Managers"]
+stream = ExtResource("6_58pxx")
+autoplay = true
+script = ExtResource("7_ogtw2")
+bpm = 140
+runeInputManagerPath = NodePath("../../RuneInput/RuneInputManager")
+
+[node name="TimingManager" type="Node" parent="Managers"]
+script = ExtResource("8_k677s")
+conductorPath = NodePath("../Conductor")
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("conductor") instance=ExtResource("9_dk046")]
+position = Vector2(894, 448)
+conductor = NodePath("../Managers/Conductor")
+
+[node name="Player" parent="." node_paths=PackedStringArray("conductor") instance=ExtResource("7_tiaps")]
+position = Vector2(182, 465)
+scale = Vector2(3, 3)
+conductor = NodePath("../Managers/Conductor")
+
+[editable path="BorderUI"]
+[editable path="RuneInput"]

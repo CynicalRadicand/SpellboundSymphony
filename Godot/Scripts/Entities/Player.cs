@@ -8,13 +8,12 @@ public partial class Player : Entity
     private List<AbilityInfo> moveSet;
 
     // Pass the signal on the first beat
-    [Export] private NodePath conductorPath;
     private AbilityInfo storedAbility = null;
 
+    [Signal] public delegate void PlayerAbilityEventHandler(AbilityInfo ability);
 
     public override void _Ready()
     {
-        var conductor = GetNode<Conductor>(conductorPath);
         conductor.Beat += CountDown;
     }
 
@@ -30,15 +29,14 @@ public partial class Player : Entity
 
     private void TriggerAbility()
     {
-        //TODO: emit signal to combat manager
         if (storedAbility != null)
         {
-            //TODO: emit signal to combat manager
+            EmitSignal(SignalName.PlayerAbility, storedAbility);
             storedAbility = null;
         }
         else
         {
-            //TODO: emit idle signal
+            EmitSignal(SignalName.PlayerAbility, null);
         }
         
     }
