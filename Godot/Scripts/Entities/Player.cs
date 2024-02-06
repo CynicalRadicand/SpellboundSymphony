@@ -52,5 +52,5 @@ public partial class Player : Entity
         //animation.Travel(storedAbility.name);
 
         storedAbility = null;
-    }
+
 }
