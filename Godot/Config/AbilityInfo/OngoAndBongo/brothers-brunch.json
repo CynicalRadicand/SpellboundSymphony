@@ -6,9 +6,5 @@
   "shield": 0,
   "statusIncoming": [],
   "statusOutgoing": [],
-  "target": [],
-  "targetZone": null,
-  "telegraph": 2,
-  "telegraphPosition": { "x": 2, "y": 1 },
-  "castingPosition": { "x": 2, "y": 1 }
+  "telegraph": 2
 }

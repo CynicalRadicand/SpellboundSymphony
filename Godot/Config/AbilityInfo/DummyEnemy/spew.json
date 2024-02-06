@@ -1,10 +1,10 @@
 {
-  "name": "Ongo's Onslaught",
-  "chance": 4,
-  "damage": 100,
+  "name": "Spew",
+  "chance": 1,
+  "damage": 10,
   "heal": 0,
   "shield": 0,
   "statusIncoming": [],
   "statusOutgoing": [],
-  "telegraph": 4
+  "telegraph": 2
 }

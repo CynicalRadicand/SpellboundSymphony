@@ -13,29 +13,19 @@ public partial class Enemy : Entity
 
     public override void _Ready()
     {
-        //TODO: load stats from JSON
+        // Load stats from JSON
+        moveSet = new List<EnemyAbilityInfo>();
 
-        // Dummy Moveset
-        EnemyAbilityInfo attack = new EnemyAbilityInfo();
-        attack.name = "Attack";
-        attack.telegraph = 6;
-        //attack.chance = 0;
-
-        EnemyAbilityInfo projectile = new EnemyAbilityInfo();
-        projectile.name = "Projectile";
-        projectile.telegraph = 4;
-        //projectile.chance = 0;
-
-        EnemyAbilityInfo spew = new EnemyAbilityInfo();
-        spew.name = "Spew";
-        spew.telegraph = 2;
-
-        moveSet = new List<EnemyAbilityInfo>
+        string enemy = "DummyEnemy";
+        List<string> abilities = new()
         {
-            attack,
-            projectile,
-            spew
+            "attack", "projectile", "spew"
         };
+
+        foreach (string ability in abilities)
+        {
+            moveSet.Add(DataPreloader.GetEnemyAbilityInfo($"{enemy}/{ability}.json"));
+        }
 
 
 
@@ -66,7 +56,7 @@ public partial class Enemy : Entity
         {
             TriggerTelegraph();
         }
-        
+
         if (delay <= 0 && telegraph == 0)
         {
             TriggerAbility();
@@ -76,7 +66,7 @@ public partial class Enemy : Entity
         {
             AbilitySelect();
         }
-        
+
 
     }
 
