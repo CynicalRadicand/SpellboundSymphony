@@ -58,13 +58,8 @@ public partial class AbilityInfo : GodotObject
         return outString;
     }
 
-    /*public override string Serialize()
-    {
-        return JsonSerializer.Serialize(this);
-    }
-
     public static AbilityInfo Deserialize(string filename)
     {
         return JsonSerialisationUtils.Deserialize<AbilityInfo>(filename, REQUIRED_FIELDS);
-    }*/
+    }
 }

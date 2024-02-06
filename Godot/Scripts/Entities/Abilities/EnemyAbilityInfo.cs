@@ -15,12 +15,10 @@ public partial class EnemyAbilityInfo : AbilityInfo
 {
     public int chance { get; set; } = 1;
     public int telegraph { get; set; } = 1; //must be between 1-8
-    public Vector2 telegraphPosition { get; set; } = Entity.DEFAULT_POSITION;
 
     protected static new List<string> REQUIRED_FIELDS = new() {
         nameof(chance),
-        nameof(telegraph),
-        nameof(telegraphPosition),
+        nameof(telegraph)
     };
 
     protected static List<IFieldValidator> FIELD_VALIDATORS = new() {
@@ -29,10 +27,6 @@ public partial class EnemyAbilityInfo : AbilityInfo
     };
 
     // 'new' keyword to hide base method from AbilityInfo
-    public new string Serialize()
-    {
-        return JsonSerializer.Serialize(this);
-    }
     public static new EnemyAbilityInfo Deserialize(string filename)
     {
 
