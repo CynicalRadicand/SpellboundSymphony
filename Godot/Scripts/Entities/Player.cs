@@ -7,14 +7,24 @@ public partial class Player : Entity
 {
     private List<AbilityInfo> moveSet;
 
-    // Pass the signal on the first beat
-    private AbilityInfo storedAbility = null;
-
     [Signal] public delegate void PlayerAbilityEventHandler(AbilityInfo ability);
+
+    private AbilityInfo storedAbility = null;
 
     public override void _Ready()
     {
         conductor.Beat += CountDown;
+
+        animation = (AnimationNodeStateMachinePlayback)GetNode<AnimationTree>("AnimationTree").Get("parameters/playback");
+        GetNode<AnimationTree>("AnimationTree").Active = true;
+
+        factory = GetNode<AbilityFactory>("AbilityFactory");
+    }
+
+    public void SetAbility(AbilityInfo ability)
+    {
+        //animation.Travel("Telegraph");
+        storedAbility = ability;
     }
 
     private void CountDown(int beatNum, bool casting)
@@ -31,13 +41,15 @@ public partial class Player : Entity
     {
         if (storedAbility != null)
         {
-            EmitSignal(SignalName.PlayerAbility, storedAbility);
+            factory.GenerateAbility(storedAbility, "Enemy");
+
+            //animation.Travel(storedAbility.name);
+
             storedAbility = null;
         }
         else
         {
-            EmitSignal(SignalName.PlayerAbility, null);
+            // animation.Travel("Fizzle");
         }
-        
     }
 }
