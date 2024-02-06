@@ -83,9 +83,10 @@ graph_offset = Vector2(37.809, 180)
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_u7ibd")
 
-[node name="AbilityFactory" type="Node2D" parent="." node_paths=PackedStringArray("projectileSpawner")]
+[node name="AbilityFactory" type="Node2D" parent="." node_paths=PackedStringArray("projectileSpawner", "meleeHitbox")]
 script = ExtResource("2_8wqmu")
-projectileSpawner = NodePath("")
+projectileSpawner = NodePath("ProjectileSpawner")
+meleeHitbox = NodePath("MeleeHitbox")
 
 [node name="MeleeHitbox" type="Area2D" parent="AbilityFactory"]
 script = ExtResource("3_ar2kh")
