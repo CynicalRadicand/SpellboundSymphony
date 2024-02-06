@@ -53,4 +53,5 @@ public partial class Player : Entity
 
         storedAbility = null;
 
+    }
 }
