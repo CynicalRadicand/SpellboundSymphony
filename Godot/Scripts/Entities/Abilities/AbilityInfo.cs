@@ -1,5 +1,8 @@
 using Godot;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
@@ -16,6 +19,15 @@ public partial class AbilityInfo : GodotObject
     public int shield { get; set; } = 0;
     public List<StatusEffect> statusIncoming { get; set; } = new List<StatusEffect>();
     public List<StatusEffect> statusOutgoing { get; set; } = new List<StatusEffect>();
+    protected static List<string> REQUIRED_FIELDS = new() {
+        nameof(name),
+        nameof(damage),
+        nameof(heal),
+        nameof(shield),
+        nameof(statusIncoming),
+        nameof(statusOutgoing)
+    };
+
 
     public override string ToString()
     {
@@ -28,7 +40,6 @@ public partial class AbilityInfo : GodotObject
         Statuses:
         - Incoming: {ListToString(statusIncoming)}
         - Outgoing: {ListToString(statusOutgoing)}
-
         ";
     }
 
@@ -47,12 +58,8 @@ public partial class AbilityInfo : GodotObject
         return outString;
     }
 
-    /*public override string Serialize()
-    {
-        return JsonSerializer.Serialize(this);
-    }
     public static AbilityInfo Deserialize(string filename)
     {
-        return JsonSerializer.Deserialize<AbilityInfo>(filename);
-    }*/
+        return JsonSerialisationUtils.Deserialize<AbilityInfo>(filename, REQUIRED_FIELDS);
+    }
 }

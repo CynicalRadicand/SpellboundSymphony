@@ -1,7 +1,6 @@
 {
   "name": "Ongo & Bongo",
   "hp": 1000,
-  "idlePosition": 1,
   "resistanceMultipliers": {
     "air": 1,
     "fire": 1,
