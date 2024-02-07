@@ -28,6 +28,8 @@ public abstract partial class Entity : Node2D
     {
         shield -= value;
         hp -= value - shield;
+
+        animation.Travel("Hurt");
     }
 
     public void Recover(int value)

@@ -32,24 +32,26 @@ public partial class Player : Entity
 
         if (beatNum == 1 && casting)
         {
-            TriggerAbility();
+            if (storedAbility != null)
+            {
+                TriggerAbility();
+            }
+            else
+            {
+                //animation.Travel("Fizzle");
+            }
         }
 
     }
 
     private void TriggerAbility()
     {
-        if (storedAbility != null)
-        {
-            factory.GenerateAbility(storedAbility, "Enemy");
+        //TODO: Refactor into entity
+        factory.GenerateAbility(storedAbility, "Enemy");
 
-            //animation.Travel(storedAbility.name);
+        //animation.Travel(storedAbility.name);
 
-            storedAbility = null;
-        }
-        else
-        {
-            // animation.Travel("Fizzle");
-        }
+        storedAbility = null;
+
     }
 }

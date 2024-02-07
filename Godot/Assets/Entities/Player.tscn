@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://5cwvymoljtmk"]
+[gd_scene load_steps=17 format=3 uid="uid://5cwvymoljtmk"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Player.cs" id="1_u7ibd"]
 [ext_resource type="Script" path="res://Assets/Entities/AbilityFactory.cs" id="2_8wqmu"]
@@ -6,79 +6,90 @@
 [ext_resource type="Texture2D" uid="uid://dd0ifrdae1a6k" path="res://Sprites/player.png" id="3_d1eay"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wrg53"]
-radius = 11.44
-height = 43.6229
+radius = 5.02578
+height = 17.9985
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f7eph"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c2r77"]
-animation = &"attack"
+[sub_resource type="Animation" id="Animation_ycwuv"]
+resource_name = "Idle"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ohmaw"]
-animation = &"attacktelegraph"
+[sub_resource type="Animation" id="Animation_hlb7j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lyrku"]
-animation = &"projectile"
+[sub_resource type="Animation" id="Animation_6q6eg"]
+resource_name = "Hurt"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [54, 55, 56, 56, 55, 54]
+}
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wq65r"]
-animation = &"projectiletelegraph"
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_20rmy"]
+_data = {
+"Hurt": SubResource("Animation_6q6eg"),
+"Idle": SubResource("Animation_ycwuv"),
+"RESET": SubResource("Animation_hlb7j")
+}
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m8m8w"]
-animation = &"Spew"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7yk24"]
+animation = &"Hurt"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fixvj"]
-animation = &"SpewTelegraph"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o0r3n"]
+animation = &"Idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_loopy"]
-resource_name = "idle"
-animation = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_chwfp"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2akco"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_icdca"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_21ja6"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_063ji"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hv0eo"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_slgv5"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qx8w7"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l2ghk"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_587pa"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rkiwl"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_71o0h"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n2e1f"]
 switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_eejjh"]
-states/Attack/node = SubResource("AnimationNodeAnimation_c2r77")
-states/Attack/position = Vector2(506, 59)
-states/AttackTelegraph/node = SubResource("AnimationNodeAnimation_ohmaw")
-states/AttackTelegraph/position = Vector2(306, 59)
 states/End/position = Vector2(1007, 170)
-states/Projectile/node = SubResource("AnimationNodeAnimation_lyrku")
-states/Projectile/position = Vector2(506, 317)
-states/ProjectileTelegraph/node = SubResource("AnimationNodeAnimation_wq65r")
-states/ProjectileTelegraph/position = Vector2(306, 317)
-states/Spew/node = SubResource("AnimationNodeAnimation_m8m8w")
-states/Spew/position = Vector2(624, 113)
-states/SpewTelegraph/node = SubResource("AnimationNodeAnimation_fixvj")
-states/SpewTelegraph/position = Vector2(624, 240)
+states/Hurt/node = SubResource("AnimationNodeAnimation_7yk24")
+states/Hurt/position = Vector2(410.809, 170)
+states/Idle/node = SubResource("AnimationNodeAnimation_o0r3n")
+states/Idle/position = Vector2(272.809, 170)
 states/Start/position = Vector2(127, 170)
-states/idle/node = SubResource("AnimationNodeAnimation_loopy")
-states/idle/position = Vector2(306, 170)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_chwfp"), "idle", "ProjectileTelegraph", SubResource("AnimationNodeStateMachineTransition_icdca"), "ProjectileTelegraph", "Projectile", SubResource("AnimationNodeStateMachineTransition_063ji"), "Projectile", "idle", SubResource("AnimationNodeStateMachineTransition_hv0eo"), "idle", "AttackTelegraph", SubResource("AnimationNodeStateMachineTransition_slgv5"), "Attack", "idle", SubResource("AnimationNodeStateMachineTransition_qx8w7"), "AttackTelegraph", "Attack", SubResource("AnimationNodeStateMachineTransition_l2ghk"), "idle", "SpewTelegraph", SubResource("AnimationNodeStateMachineTransition_587pa"), "SpewTelegraph", "Spew", SubResource("AnimationNodeStateMachineTransition_rkiwl"), "Spew", "idle", SubResource("AnimationNodeStateMachineTransition_71o0h")]
-graph_offset = Vector2(37.809, 180)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_2akco"), "Idle", "Hurt", SubResource("AnimationNodeStateMachineTransition_21ja6"), "Hurt", "Idle", SubResource("AnimationNodeStateMachineTransition_n2e1f")]
+graph_offset = Vector2(-115.191, 75.4854)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_u7ibd")
@@ -92,24 +103,28 @@ meleeHitbox = NodePath("MeleeHitbox")
 script = ExtResource("3_ar2kh")
 
 [node name="Hitbox" type="CollisionShape2D" parent="AbilityFactory/MeleeHitbox"]
-position = Vector2(-25, 42)
-rotation = -1.35385
+position = Vector2(17, 11)
+rotation = -1.55769
 shape = SubResource("CapsuleShape2D_wrg53")
 disabled = true
 
 [node name="ProjectileSpawner" type="Node2D" parent="AbilityFactory"]
-position = Vector2(-35, 43)
+position = Vector2(10, 11)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_d1eay")
 hframes = 6
 vframes = 10
+frame = 6
 
 [node name="Hurtbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 6)
 shape = SubResource("CapsuleShape2D_f7eph")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_20rmy")
+}
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_eejjh")
