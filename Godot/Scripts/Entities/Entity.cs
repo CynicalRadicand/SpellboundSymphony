@@ -28,10 +28,15 @@ public abstract partial class Entity : Node2D
         defaultPosition = Position;
     }
 
-    public void Damage(int value)
+    public void Damage(int damage)
     {
-        hp -= value - shield;
-        shield -= value;
+        int remainderDamage = damage - shield;
+        hp -= remainderDamage;
+        shield -= remainderDamage;
+        if (shield < 0)
+        {
+            shield = 0;
+        }
 
         animation.Travel("Hurt");
 

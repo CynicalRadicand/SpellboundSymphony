@@ -1,7 +1,7 @@
 {
   "name": "Projectile",
   "chance": 1,
-  "damage": 50,
+  "damage": 25,
   "heal": 0,
   "shield": 0,
   "statusIncoming": [],
