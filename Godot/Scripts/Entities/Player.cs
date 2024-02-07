@@ -11,6 +11,8 @@ public partial class Player : Entity
 
     private AbilityInfo storedAbility = null;
 
+
+
     public override void _Ready()
     {
         conductor.Beat += CountDown;
@@ -19,6 +21,11 @@ public partial class Player : Entity
         GetNode<AnimationTree>("AnimationTree").Active = true;
 
         factory = GetNode<AbilityFactory>("AbilityFactory");
+
+        hpBar = GetNode<ProgressBar>("HpBar");
+        hpBar.MaxValue = maxHp;
+        hp = maxHp;
+        updateHP();
     }
 
     public void SetAbility(AbilityInfo ability)

@@ -21,7 +21,7 @@ public partial class AbilityFactory : Node2D
 		//TODO: Damage Calculation
 		if (ResourceLoader.Exists("res://Assets/Projectiles/" + ability.name + ".tscn"))
 		{
-			SpawnProjectile(ability.name, 0, target);
+			SpawnProjectile(ability.name, 10, target);
 		}
         else
         {
