@@ -25,5 +25,28 @@ public partial class PlayerOverworld : Node2D
         velocity.X = Mathf.MoveToward(velocity.X, maxRun * direction, runAccel * (float)delta);
 
 		GlobalPosition += new Vector2(velocity.X * (float)delta, 0);
+
+		UpdateAnimation(direction);
 	}
+
+	private void UpdateAnimation(float direction)
+	{
+		if(velocity == Vector2.Zero)
+		{
+			animation.Set("parameters/conditions/idle", true);
+			animation.Set("parameters/conditions/moving", false);
+        }
+		else
+		{
+            animation.Set("parameters/conditions/idle", false);
+            animation.Set("parameters/conditions/moving", true);
+        }
+
+		if (direction != 0)
+		{
+            animation.Set("parameters/Idle/blend_position", direction);
+            animation.Set("parameters/Run/blend_position", direction);
+        }
+		
+    }
 }
