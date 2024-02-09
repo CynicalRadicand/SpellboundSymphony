@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp8bas51vl80w"]
+
+[ext_resource type="PackedScene" uid="uid://dsfs7gjttmvwy" path="res://Assets/Overworld/PlayerOverworld.tscn" id="1_s3sk5"]
+
+[node name="OverworldExample" type="Node2D"]
+
+[node name="PlayerOverworld" parent="." instance=ExtResource("1_s3sk5")]
+
+[node name="Wall" type="Node2D" parent="."]
