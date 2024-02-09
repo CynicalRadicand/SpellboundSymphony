@@ -1,5 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://dsfs7gjttmvwy"]
+[gd_scene load_steps=23 format=3 uid="uid://dsfs7gjttmvwy"]
 
+[ext_resource type="Script" path="res://Scripts/Entities/PlayerOverworld.cs" id="1_fc8a7"]
 [ext_resource type="Texture2D" uid="uid://egvrlc6wmmrl" path="res://Sprites/adventurer-Sheet.png" id="1_oo0o8"]
 
 [sub_resource type="Animation" id="Animation_k6542"]
@@ -121,6 +122,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pn24j"]
 advance_mode = 2
+advance_condition = &"isOnGround"
 advance_expression = "isInAir == false"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_42dip"]
@@ -145,6 +147,7 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(-36, -125.241)
 
 [node name="Player" type="Node2D"]
+script = ExtResource("1_fc8a7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_oo0o8")
@@ -163,6 +166,7 @@ active = true
 parameters/conditions/isIdle = false
 parameters/conditions/isInAir = false
 parameters/conditions/isMoving = false
+parameters/conditions/isOnGround = false
 parameters/Fall/blend_position = 0
 parameters/Idle/blend_position = 0
 parameters/Jump/blend_position = 0
