@@ -1,0 +1,10 @@
+{
+  "name": "Projectile",
+  "chance": 1,
+  "damage": 50,
+  "heal": 0,
+  "shield": 0,
+  "statusIncoming": [],
+  "statusOutgoing": [],
+  "telegraph": 4
+}

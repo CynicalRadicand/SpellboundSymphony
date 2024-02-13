@@ -1,0 +1,15 @@
+{
+  "name": "B & O",
+  "chance": 1,
+  "damage": 20,
+  "heal": 0,
+  "shield": 0,
+  "statusIncoming": [],
+  "statusOutgoing": [
+	{
+	  "status": 4,
+	  "duration": 2
+	}
+  ],
+  "telegraph": 6
+}
