@@ -6,21 +6,24 @@ public partial class PlayerOverworld : Node2D
 	Vector2 velocity = Vector2.Zero;
 	int maxRun = 100;
 	int runAccel = 800;
-	int maxFall = 160;
+	int maxFall = 200;
 	int gravity = 1000;
-	int jumpForce = -160;
+	int jumpForce = -200;
 	double jumpHoldTime = 0.2;
 	double localHoldTime = 0;
 
 	bool grounded = true;
+	float direction;
 
     protected AnimationTree animation;
+	AnimationNodeStateMachinePlayback animationPlayback;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
 
         animation = GetNode<AnimationTree>("AnimationTree");
+        animationPlayback = (AnimationNodeStateMachinePlayback) animation.Get("parameters/playback");
         GetNode<AnimationTree>("AnimationTree").Active = true;
     }
 
@@ -29,15 +32,15 @@ public partial class PlayerOverworld : Node2D
 	{
 
 
-		float direction = Input.GetActionStrength("MoveRight") - Input.GetActionStrength("MoveLeft");
+		direction = Input.GetActionStrength("MoveRight") - Input.GetActionStrength("MoveLeft");
 
 		bool jump = Input.IsActionPressed("MoveUp");
-		grounded = GlobalPosition.Y >= 160;
 
 		if (jump && grounded) {
 			velocity.Y = jumpForce;
 			localHoldTime = jumpHoldTime;
-		} else if (localHoldTime > 0) { 
+            animationPlayback.Travel("Jump");
+        } else if (localHoldTime > 0) { 
 			if (jump)
 			{
 				velocity.Y = jumpForce;
@@ -55,16 +58,21 @@ public partial class PlayerOverworld : Node2D
 
         GlobalPosition += new Vector2(velocity.X * (float)delta, velocity.Y * (float)delta);
 
-		if (GlobalPosition.Y >= 160)
+		if (GlobalPosition.Y >= 200)
 		{
-			GlobalPosition = new Vector2(GlobalPosition.X, 160);
+			GlobalPosition = new Vector2(GlobalPosition.X, 200);
+			grounded = true;
 		}
+		else
+		{
+            grounded = false;
+        }
 
-		UpdateAnimation(direction);
+		UpdateAnimation();
 
 	}
 
-	private void UpdateAnimation(float direction)
+	private void UpdateAnimation()
 	{
 		if(velocity.X == 0)
 		{
@@ -81,6 +89,19 @@ public partial class PlayerOverworld : Node2D
 		{
             animation.Set("parameters/Idle/blend_position", direction);
             animation.Set("parameters/Run/blend_position", direction);
+            animation.Set("parameters/Jump/blend_position", direction);
+            animation.Set("parameters/Fall/blend_position", direction);
+        }
+
+		if (grounded)
+		{
+            animation.Set("parameters/conditions/grounded", true);
+            animation.Set("parameters/conditions/airborne", false);
+        }
+		else
+		{
+            animation.Set("parameters/conditions/grounded", false);
+            animation.Set("parameters/conditions/airborne", true);
         }
 		
     }
