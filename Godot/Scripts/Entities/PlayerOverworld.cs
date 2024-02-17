@@ -1,19 +1,23 @@
 using Godot;
 using System;
 
-public partial class PlayerOverworld : Node2D
+public partial class PlayerOverworld : CharacterBody2D
 {
 	Vector2 velocity = Vector2.Zero;
-	int maxRun = 100;
-	int runAccel = 800;
-	int maxFall = 200;
-	int gravity = 1000;
-	int jumpForce = -200;
+
+    public float maxSpeed = 150.0f;
+    public float jumpForce = -200.0f;
+    public float accel = 800.0f;
+
+    public float maxFall = 500f;
+
+    // Get the gravity from the project settings to be synced with RigidBody nodes.
+    public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+
 	double jumpHoldTime = 0.2;
 	double localHoldTime = 0;
 
-	bool grounded = true;
-	float direction;
+	Vector2 direction;
 
     protected AnimationTree animation;
 	AnimationNodeStateMachinePlayback animationPlayback;
@@ -27,41 +31,45 @@ public partial class PlayerOverworld : Node2D
         GetNode<AnimationTree>("AnimationTree").Active = true;
     }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _PhysicsProcess(double delta)
-	{
 
-		direction = Input.GetActionStrength("MoveRight") - Input.GetActionStrength("MoveLeft");
+    public override void _PhysicsProcess(double delta)
+    {
+        velocity = Velocity;
+
+        if (!IsOnFloor())
+        {
+            velocity.Y += gravity * (float)delta;
+        }
+
+
+        if (velocity.Y > maxFall)
+        {
+            velocity.Y = maxFall;
+        }
 
         Jump();
         localHoldTime -= delta;
 
-        velocity.X = Mathf.MoveToward(velocity.X, maxRun * direction, runAccel * (float)delta);
-        velocity.Y = Mathf.MoveToward(velocity.Y, maxFall, gravity * (float)delta);
-
-
-        GlobalPosition += new Vector2(velocity.X * (float)delta, velocity.Y * (float)delta);
-
-        // Fake Floor, remove later
-		if (GlobalPosition.Y >= 200)
-		{
-			GlobalPosition = new Vector2(GlobalPosition.X, 200);
-			grounded = true;
-		}
-		else
-		{
-            grounded = false;
+        direction = Input.GetVector("MoveLeft", "MoveRight", "MoveUp", "MoveDown");
+        if (direction != Vector2.Zero)
+        {
+            velocity.X = (float) Mathf.MoveToward(Velocity.X, direction.X * maxSpeed, accel * delta);
+        }
+        else
+        {
+            velocity.X = Mathf.MoveToward(Velocity.X, 0, maxSpeed);
         }
 
-		UpdateAnimation();
+        Velocity = velocity;
+        MoveAndSlide();
 
-	}
+        UpdateAnimation();
+    }
 
 	private void Jump()
 	{
-        bool jump = Input.IsActionPressed("MoveUp");
 
-        if (jump && grounded)
+        if (Input.IsActionJustPressed("MoveUp") && IsOnFloor())
         {
             velocity.Y = jumpForce;
             localHoldTime = jumpHoldTime;
@@ -69,7 +77,7 @@ public partial class PlayerOverworld : Node2D
         }
         else if (localHoldTime > 0)
         {
-            if (jump)
+            if (Input.IsActionPressed("MoveUp"))
             {
                 velocity.Y = jumpForce;
             }
@@ -94,7 +102,7 @@ public partial class PlayerOverworld : Node2D
             animation.Set("parameters/conditions/moving", true);
         }
 
-        if (grounded)
+        if (IsOnFloor())
         {
             animation.Set("parameters/conditions/grounded", true);
             animation.Set("parameters/conditions/airborne", false);
@@ -105,12 +113,12 @@ public partial class PlayerOverworld : Node2D
             animation.Set("parameters/conditions/airborne", true);
         }
 
-        if (direction != 0)
+        if (direction.X != 0)
 		{
-            animation.Set("parameters/Idle/blend_position", direction);
-            animation.Set("parameters/Run/blend_position", direction);
-            animation.Set("parameters/Jump/blend_position", direction);
-            animation.Set("parameters/Fall/blend_position", direction);
+            animation.Set("parameters/Idle/blend_position", direction.X);
+            animation.Set("parameters/Run/blend_position", direction.X);
+            animation.Set("parameters/Jump/blend_position", direction.X);
+            animation.Set("parameters/Fall/blend_position", direction.X);
         }
 
     }
