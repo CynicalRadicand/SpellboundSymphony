@@ -10,13 +10,13 @@ public partial class RuneStorePresenter : Node
 
     RuneStoreView storeView;
     RuneStoreController storeController;
-    SpellCastPresenter spellCastPresenter;
+    SpellBookPresenter spellBookPresenter;
 
     public override void _Ready()
     {
         storeView = GetNode<RuneStoreView>("RuneStoreView");
         storeController = GetNode<RuneStoreController>("RuneStoreController");
-        spellCastPresenter = GetNode<SpellCastPresenter>(spellCastPresenterPath);
+        spellBookPresenter = GetNode<SpellBookPresenter>(spellCastPresenterPath);
 
         timingManager = GetNode<TimingManager>(timingManagerPath);
         timingManager.TimingInput += HandleInput;
@@ -46,17 +46,16 @@ public partial class RuneStorePresenter : Node
 
     private void CastRunes()
     {
-        List<Rune> runes = storeController.GetRunes();
-        storeView.ShowCasting(new RuneSequence(runes));
+        RuneSequence runes = new(storeController.GetRunes());
+        storeView.ShowCasting(runes);
 
-        Spell spell = spellCastPresenter.GetSpell(runes);
-
-        if (spell != null)
+        try
         {
-            storeView.ShowSuccessfulCast(spell);
+            PlayerAbilityInfo ability = spellBookPresenter.GetSpell(runes);
+            storeView.ShowSuccessfulCast(ability);
             //TODO: send signal to player
         }
-        else
+        catch (SpellNotFoundException)
         {
             storeView.ShowFailedCast("Incorrect rune order.");
         }

@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 public partial class Player : Entity
 {
-    private List<AbilityInfo> moveSet;
+    private SpellBook spellBook;
 
     [Signal] public delegate void PlayerAbilityEventHandler(AbilityInfo ability);
 
@@ -19,6 +19,12 @@ public partial class Player : Entity
         GetNode<AnimationTree>("AnimationTree").Active = true;
 
         factory = GetNode<AbilityFactory>("AbilityFactory");
+
+
+        spellBook.SetLoadout(new List<PlayerAbilityInfo>() {
+            SpellPreloader.GetPlayerAbilityInfo("lightning-bolt"),
+            SpellPreloader.GetPlayerAbilityInfo("earth-pillar"),
+        });
     }
 
     public void SetAbility(AbilityInfo ability)

@@ -1,9 +1,11 @@
 {
-  "name": "Lightning Bolt",
+  "name": "Earth Pillar",
   "damage": 10,
   "heal": 0,
   "shield": 0,
   "statusIncoming": [],
   "statusOutgoing": [],
-  "runeSequence": [0, 1, 1, 0]
+  "runeSequence": {
+    "runes": [1, 2, 1, 0]
+  }
 }
