@@ -36,7 +36,8 @@ public partial class Player : Entity
 
     public void SetAbility(AbilityInfo ability)
     {
-        //animation.Travel("Telegraph");
+        animation.Travel("Telegraph");
+        GD.Print("Telegraph");
         storedAbility = ability;
     }
 
@@ -51,7 +52,8 @@ public partial class Player : Entity
             }
             else
             {
-                //animation.Travel("Fizzle");
+                animation.Travel("Fizzle");
+                GD.Print("Fizzle");
             }
         }
 
@@ -62,7 +64,7 @@ public partial class Player : Entity
         //TODO: Refactor into entity
         factory.GenerateAbility(storedAbility, "Enemy");
 
-        //animation.Travel(storedAbility.name);
+        animation.Travel(storedAbility.name);
 
         // Clear ability
         storedAbility = null;
