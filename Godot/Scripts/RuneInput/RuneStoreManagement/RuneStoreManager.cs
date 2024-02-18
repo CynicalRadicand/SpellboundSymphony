@@ -13,14 +13,14 @@ public partial class RuneStoreManager : Node
     private TimingManager timingManager;
 
     RuneStoreView storeView;
-    RuneStore storeController;
+    RuneStore runeStore;
 
 
 
     public override void _Ready()
     {
         storeView = GetNode<RuneStoreView>("RuneStoreView");
-        storeController = GetNode<RuneStore>("RuneStoreController");
+        runeStore = GetNode<RuneStore>("RuneStoreController");
 
         timingManager = GetNode<TimingManager>(timingManagerPath);
         timingManager.TimingInput += HandleInput;
@@ -28,38 +28,33 @@ public partial class RuneStoreManager : Node
 
     public void AddRune(Rune rune)
     {
-
-        // TODO: replace with check from Conductor class
-        bool isOnBeat = true;
-
-        if (!isOnBeat)
-        {
-            HandleMiss();
-        }
-
-        storeController.EnqueueRune(rune);
+        runeStore.EnqueueRune(rune);
 
         // Update the current runes in UI
-        storeView.UpdateRunes(new RuneSequence(storeController.GetRunes()));
+        storeView.UpdateRunes(new RuneSequence(runeStore.GetRunes()));
 
-        if (storeController.IsFull())
+        if (runeStore.IsFull())
         {
-            CastRunes();
+            TryCastRunes();
         }
     }
 
-    private void CastRunes()
+    private void TryCastRunes()
     {
-        RuneSequence runes = new(storeController.GetRunes());
+        RuneSequence runes = new(runeStore.GetRunes());
         storeView.ShowCasting(runes);
 
         try
         {
+            // Check if ability exists in loadout
             PlayerAbilityInfo ability = player.spellBook.GetSpellByRunes(runes);
-            storeView.ShowSuccessfulCast(ability);
+
+            // TODO: check for misses
+            // if -> HandleMiss();
 
             //TODO: send signal to player
             player.SetAbility(ability);
+            storeView.ShowSuccessfulCast(ability); // TODO: replace with UI updates
         }
         catch (SpellNotFoundException)
         {
@@ -67,7 +62,7 @@ public partial class RuneStoreManager : Node
             // Fizzles (in Player), do not set any ability 
         }
 
-        storeController.ClearQueue();
+        runeStore.ClearQueue();
     }
 
     // TODO: see how to integrate this with Conductor class
@@ -77,7 +72,7 @@ public partial class RuneStoreManager : Node
 
         storeView.ShowFailedCast("Spell casting was broken!");
 
-        storeController.ClearQueue();
+        runeStore.ClearQueue();
     }
 
     //TODO: add to signal listener
