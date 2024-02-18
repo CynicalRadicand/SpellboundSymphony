@@ -3,20 +3,24 @@ using System.Collections.Generic;
 
 public partial class RuneStorePresenter : Node
 {
-    [Export] private NodePath spellCastPresenterPath;
+    /// <summary>
+    /// Reason for referencing player directly: Better to have external managers 
+    /// reference the player, rather than the player referencing all the managers.
+    /// </summary>
+    [Export] private Player player;
     [Export] private NodePath timingManagerPath;
 
     private TimingManager timingManager;
 
     RuneStoreView storeView;
     RuneStoreController storeController;
-    SpellBookPresenter spellBookPresenter;
+
+
 
     public override void _Ready()
     {
         storeView = GetNode<RuneStoreView>("RuneStoreView");
         storeController = GetNode<RuneStoreController>("RuneStoreController");
-        spellBookPresenter = GetNode<SpellBookPresenter>(spellCastPresenterPath);
 
         timingManager = GetNode<TimingManager>(timingManagerPath);
         timingManager.TimingInput += HandleInput;
@@ -51,9 +55,11 @@ public partial class RuneStorePresenter : Node
 
         try
         {
-            PlayerAbilityInfo ability = spellBookPresenter.GetSpell(runes);
+            PlayerAbilityInfo ability = player.spellBook.GetSpellByRunes(runes);
             storeView.ShowSuccessfulCast(ability);
+
             //TODO: send signal to player
+            player.SetAbility(ability);
         }
         catch (SpellNotFoundException)
         {

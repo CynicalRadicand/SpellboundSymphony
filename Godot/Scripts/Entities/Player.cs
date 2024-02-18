@@ -5,9 +5,9 @@ using System.Runtime.CompilerServices;
 
 public partial class Player : Entity
 {
-    private SpellBook spellBook;
 
     [Signal] public delegate void PlayerAbilityEventHandler(AbilityInfo ability);
+    public SpellBook spellBook;
 
     private AbilityInfo storedAbility = null;
 
@@ -21,10 +21,17 @@ public partial class Player : Entity
         factory = GetNode<AbilityFactory>("AbilityFactory");
 
 
-        spellBook.SetLoadout(new List<PlayerAbilityInfo>() {
-            SpellPreloader.GetPlayerAbilityInfo("lightning-bolt"),
-            SpellPreloader.GetPlayerAbilityInfo("earth-pillar"),
-        });
+        spellBook = new SpellBook();
+        spellBook.ClearLoadout();
+
+        List<string> abilities = new()
+        {
+            "lightning-bolt", "earth-pillar"
+        };
+        foreach (string ability in abilities)
+        {
+            spellBook.AddSpell(SpellPreloader.GetPlayerAbilityInfo(ability));
+        }
     }
 
     public void SetAbility(AbilityInfo ability)

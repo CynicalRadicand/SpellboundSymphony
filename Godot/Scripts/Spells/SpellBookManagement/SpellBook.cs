@@ -6,6 +6,16 @@ public partial class SpellBook : Node
     // TODO: consider abstracting loadouts even further beyond lists
     private List<PlayerAbilityInfo> loadout;
 
+    public SpellBook()
+    {
+        loadout = new List<PlayerAbilityInfo>();
+    }
+
+    public void AddSpell(PlayerAbilityInfo spell)
+    {
+        loadout.Add(spell);
+    }
+
     public void SetLoadout(List<PlayerAbilityInfo> newLoadout)
     {
         loadout = newLoadout;
@@ -25,6 +35,6 @@ public partial class SpellBook : Node
                 return ability;
             }
         }
-        throw new SpellNotFoundException(string.Format("Spell with runes {0} does not exist in loadout.", runeSequence));
+        throw new SpellNotFoundException($"Spell with runes {runeSequence} does not exist in loadout.");
     }
 }
