@@ -24,6 +24,8 @@ public partial class RuneStoreManager : Node
 
         timingManager = GetNode<TimingManager>(timingManagerPath);
         timingManager.TimingInput += HandleInput;
+
+        player.FinishInput += HandleMeasureClear;
     }
 
     public void AddRune(Rune rune)
@@ -62,6 +64,11 @@ public partial class RuneStoreManager : Node
             // Fizzles (in Player), do not set any ability 
         }
 
+        runeStore.ClearQueue();
+    }
+
+    private void HandleMeasureClear()
+    {
         runeStore.ClearQueue();
     }
 

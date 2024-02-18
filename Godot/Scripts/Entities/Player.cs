@@ -7,6 +7,7 @@ public partial class Player : Entity
 {
 
     [Signal] public delegate void PlayerAbilityEventHandler(AbilityInfo ability);
+    [Signal] public delegate void FinishInputEventHandler();
     public SpellBook spellBook;
 
     private AbilityInfo storedAbility = null;
@@ -55,6 +56,8 @@ public partial class Player : Entity
                 animation.Travel("Fizzle");
                 GD.Print("Fizzle");
             }
+
+            EmitSignal(SignalName.FinishInput);
         }
 
     }
