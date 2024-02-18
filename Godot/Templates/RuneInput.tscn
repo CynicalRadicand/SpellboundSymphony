@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cgjj0uftexwed"]
 
 [ext_resource type="Script" path="res://Scripts/RuneInput/RuneInputManager.cs" id="1_b3kuu"]
-[ext_resource type="Script" path="res://Scripts/RuneInput/RuneStoreManagement/RuneStoreController.cs" id="2_rtbiv"]
-[ext_resource type="Script" path="res://Scripts/RuneInput/RuneStoreManagement/RuneStorePresenter.cs" id="3_7cs6c"]
+[ext_resource type="Script" path="res://Scripts/RuneInput/RuneStoreManagement/RuneStoreManager.cs" id="2_qwvwp"]
+[ext_resource type="Script" path="res://Scripts/RuneInput/RuneStoreManagement/RuneStore.cs" id="3_13upl"]
 [ext_resource type="Script" path="res://Scripts/RuneInput/RuneStoreManagement/RuneStoreView.cs" id="4_0wo8t"]
 
 [node name="RuneInput" type="Node2D"]
@@ -11,10 +11,10 @@
 script = ExtResource("1_b3kuu")
 
 [node name="RuneStoreManager" type="Node" parent="."]
-script = ExtResource("3_7cs6c")
+script = ExtResource("2_qwvwp")
 
 [node name="RuneStoreController" type="Node" parent="RuneStoreManager"]
-script = ExtResource("2_rtbiv")
+script = ExtResource("3_13upl")
 
 [node name="RuneStoreView" type="Node" parent="RuneStoreManager"]
 script = ExtResource("4_0wo8t")

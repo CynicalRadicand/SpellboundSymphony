@@ -1,7 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 
-public partial class RuneStorePresenter : Node
+public partial class RuneStoreManager : Node
 {
     /// <summary>
     /// Reason for referencing player directly: Better to have external managers 
@@ -13,14 +13,14 @@ public partial class RuneStorePresenter : Node
     private TimingManager timingManager;
 
     RuneStoreView storeView;
-    RuneStoreController storeController;
+    RuneStore storeController;
 
 
 
     public override void _Ready()
     {
         storeView = GetNode<RuneStoreView>("RuneStoreView");
-        storeController = GetNode<RuneStoreController>("RuneStoreController");
+        storeController = GetNode<RuneStore>("RuneStoreController");
 
         timingManager = GetNode<TimingManager>(timingManagerPath);
         timingManager.TimingInput += HandleInput;
