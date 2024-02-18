@@ -11,6 +11,9 @@ public partial class SpellPreloader : Node
     /// <param name="filename"></param>
     public static PlayerAbilityInfo GetPlayerAbilityInfo(string filename)
     {
+        // PlayerAbilityInfo ability = PlayerAbilityInfo.Deserialize($"{SPELL_CONFIG_PATH}/{filename}.json");
+        // return ability;
+
         AbilityInfo tempAbility = AbilityInfo.Deserialize($"{SPELL_CONFIG_PATH}/{filename}.json");
 
         // FIXME: temporary conversion until RuneSequence can be deserialised

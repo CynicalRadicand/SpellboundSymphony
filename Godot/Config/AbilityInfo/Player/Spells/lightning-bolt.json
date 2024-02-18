@@ -5,5 +5,12 @@
   "shield": 0,
   "statusIncoming": [],
   "statusOutgoing": [],
-  "runeSequence": [0, 1, 1, 0]
+  "runeSequence": {
+    "runes": [
+      { "element": 0 },
+      { "element": 1 },
+      { "element": 1 },
+      { "element": 0 }
+    ]
+  }
 }

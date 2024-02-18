@@ -64,6 +64,7 @@ public partial class Player : Entity
 
         //animation.Travel(storedAbility.name);
 
+        // Clear ability
         storedAbility = null;
 
     }

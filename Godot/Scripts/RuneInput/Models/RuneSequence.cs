@@ -6,7 +6,7 @@ using System.Linq;
 /// </summary>
 public class RuneSequence
 {
-    public Rune[] runes { private set; get; }
+    public Rune[] runes { set; get; } = null;
 
     public RuneSequence(List<Rune> runes)
     {

@@ -64,6 +64,7 @@ public partial class RuneStorePresenter : Node
         catch (SpellNotFoundException)
         {
             storeView.ShowFailedCast("Incorrect rune order.");
+            // Fizzles (in Player), do not set any ability 
         }
 
         storeController.ClearQueue();

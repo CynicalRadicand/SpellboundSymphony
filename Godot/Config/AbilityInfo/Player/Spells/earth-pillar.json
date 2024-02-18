@@ -6,6 +6,11 @@
   "statusIncoming": [],
   "statusOutgoing": [],
   "runeSequence": {
-    "runes": [1, 2, 1, 0]
+    "runes": [
+      { "element": 0 },
+      { "element": 1 },
+      { "element": 1 },
+      { "element": 0 }
+    ]
   }
 }
