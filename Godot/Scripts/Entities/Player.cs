@@ -5,9 +5,10 @@ using System.Runtime.CompilerServices;
 
 public partial class Player : Entity
 {
-    private List<AbilityInfo> moveSet;
 
     [Signal] public delegate void PlayerAbilityEventHandler(AbilityInfo ability);
+    [Signal] public delegate void FinishInputEventHandler();
+    public SpellBook spellBook;
 
     private AbilityInfo storedAbility = null;
 
@@ -19,11 +20,25 @@ public partial class Player : Entity
         GetNode<AnimationTree>("AnimationTree").Active = true;
 
         factory = GetNode<AbilityFactory>("AbilityFactory");
+
+
+        spellBook = new SpellBook();
+        spellBook.ClearLoadout();
+
+        List<string> abilities = new()
+        {
+            "lightning-bolt", "earth-pillar"
+        };
+        foreach (string ability in abilities)
+        {
+            spellBook.AddSpell(SpellPreloader.GetPlayerAbilityInfo(ability));
+        }
     }
 
     public void SetAbility(AbilityInfo ability)
     {
-        //animation.Travel("Telegraph");
+        animation.Travel("Telegraph");
+        GD.Print("Telegraph");
         storedAbility = ability;
     }
 
@@ -38,8 +53,11 @@ public partial class Player : Entity
             }
             else
             {
-                //animation.Travel("Fizzle");
+                animation.Travel("Fizzle");
+                GD.Print("Fizzle");
             }
+
+            EmitSignal(SignalName.FinishInput);
         }
 
     }
@@ -49,8 +67,9 @@ public partial class Player : Entity
         //TODO: Refactor into entity
         factory.GenerateAbility(storedAbility, "Enemy");
 
-        //animation.Travel(storedAbility.name);
+        animation.Travel(storedAbility.name);
 
+        // Clear ability
         storedAbility = null;
 
     }
