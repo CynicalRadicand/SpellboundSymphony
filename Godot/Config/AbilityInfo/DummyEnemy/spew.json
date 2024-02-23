@@ -1,7 +1,7 @@
 {
   "name": "Spew",
   "chance": 1,
-  "damage": 10,
+  "damage": 50,
   "heal": 0,
   "shield": 0,
   "statusIncoming": [],
