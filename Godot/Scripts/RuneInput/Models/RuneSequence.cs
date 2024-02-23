@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// Used for storing a sequence of runes or as an empty store for runes.
 /// </summary>
 public class RuneSequence
 {
-    public Rune[] runes { private set; get; }
+    public Rune[] runes { set; get; } = null;
 
     public RuneSequence(List<Rune> runes)
     {
@@ -17,7 +18,7 @@ public class RuneSequence
             if (this.runes[i] == null)
             {
                 // FIXME: probably need a better way to get template runes
-                this.runes[i] = new Rune(Elements.NONE, " ");
+                this.runes[i] = new Rune(Elements.EMPTY, " ", Accuracy.EMPTY);
             }
         }
     }
@@ -38,5 +39,42 @@ public class RuneSequence
         output += "]";
 
         return output;
+    }
+    public override bool Equals(object obj)
+    {
+        //
+        // See the full list of guidelines at
+        //   http://go.microsoft.com/fwlink/?LinkID=85237
+        // and also the guidance for operator== at
+        //   http://go.microsoft.com/fwlink/?LinkId=85238
+        //
+
+        if (obj == null || GetType() != obj.GetType())
+        {
+            return false;
+        }
+
+        RuneSequence comparison = (RuneSequence)obj;
+
+        for (int i = 0; i < runes.Length; i++)
+        {
+            Elements thisElement = runes[i].element;
+            Elements thatElement = comparison.runes[i].element;
+
+            if (!thisElement.Equals(thatElement))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// Necessary override when overriding Equals()
+    /// </summary>
+    /// <returns></returns>
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
     }
 }

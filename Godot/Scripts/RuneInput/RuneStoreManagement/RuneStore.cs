@@ -4,8 +4,9 @@ using System.Collections.Generic;
 /// <summary>
 /// Represents the rune store and is solely responsible for storage (no logic).
 /// </summary>
-public partial class RuneStoreController : Node
+public partial class RuneStore : Node
 {
+    // TODO: change to array with four slots, as we may attempt to slot into the same slot.
     private List<Rune> runes;
 
     // Called when the node enters the scene tree for the first time.

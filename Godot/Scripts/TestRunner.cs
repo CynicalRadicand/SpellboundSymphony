@@ -35,7 +35,7 @@ public class TestRunner
 
         foreach (string ability in abilities)
         {
-            GD.Print(DataPreloader.GetEnemyAbilityInfo($"{enemy}/{ability}.json"));
+            GD.Print(DataPreloader.GetEnemyAbilityInfo(enemy, ability));
         }
     }
 

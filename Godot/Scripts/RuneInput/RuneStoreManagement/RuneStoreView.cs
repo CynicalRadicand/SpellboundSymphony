@@ -16,9 +16,9 @@ public partial class RuneStoreView : Node
         GD.Print($"Casting runes: {sequence}");
     }
 
-    public void ShowSuccessfulCast(Spell spell)
+    public void ShowSuccessfulCast(PlayerAbilityInfo ability)
     {
-        GD.Print($"Successfully cast spell: {spell.name}");
+        GD.Print($"Successfully cast spell: {ability.name}");
     }
 
     public void ShowFailedCast(string message)
