@@ -18,16 +18,15 @@ public partial class AbilityFactory : Node2D
 	}
 
 	public void GenerateAbility(AbilityInfo ability, string target) {
-
-		int totalDamage = DamageCalculation(ability.damage);
-
+		//TODO: Damage Calculation
 		if (ResourceLoader.Exists("res://Assets/Projectiles/" + ability.name + ".tscn"))
 		{
-			SpawnProjectile(ability.name, totalDamage, target);
+			SpawnProjectile(ability.name, 0, target);
 		}
         else
         {
-			meleeHitbox.SetParams(totalDamage, target);
+			//TODO: change melee hitbox damage
+			meleeHitbox.SetParams(0, target);
         }
     }
 
@@ -39,11 +38,4 @@ public partial class AbilityFactory : Node2D
 		GetTree().CurrentScene.AddChild(projectile);
 		projectile.GlobalPosition = projectileSpawner.GlobalPosition;
     }
-
-	private int DamageCalculation(int baseDamage)
-	{
-		int totalDamage = baseDamage;
-
-		return totalDamage;
-	}
 }

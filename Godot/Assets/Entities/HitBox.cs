@@ -31,6 +31,7 @@ public partial class HitBox : Area2D
         {
             Entity entity = (Entity)body;
             entity.Damage(damage);
+            GD.Print("TARGET HIT");
         }
     }
 }

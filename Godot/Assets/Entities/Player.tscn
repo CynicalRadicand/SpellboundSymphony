@@ -11,9 +11,6 @@ height = 17.9985
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f7eph"]
 
-
-[sub_resource type="Animation" id="Animation_6q6eg"]
-resource_name = "Hurt"
 [sub_resource type="Animation" id="Animation_6730d"]
 resource_name = "Fizzle"
 length = 0.3
@@ -49,6 +46,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_ycwuv"]
 resource_name = "Idle"
 length = 0.5
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -59,13 +57,9 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [54, 55, 56, 56, 55, 54]
+"values": [6, 7, 8, 9, 10, 11]
 }
 
-[sub_resource type="Animation" id="Animation_ycwuv"]
-resource_name = "Idle"
-length = 0.5
-loop_mode = 1
 [sub_resource type="Animation" id="Animation_bwqrh"]
 resource_name = "Lightning Bolt"
 length = 0.4
@@ -91,14 +85,12 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [6, 7, 8, 9, 10, 11]
+"values": [6]
 }
 
-[sub_resource type="Animation" id="Animation_hlb7j"]
-length = 0.001
 [sub_resource type="Animation" id="Animation_1vne1"]
 resource_name = "Telegraph"
 length = 0.3
@@ -110,10 +102,6 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [6]
 "times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
@@ -186,7 +174,6 @@ graph_offset = Vector2(-53.316, -66.782)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_u7ibd")
-maxHp = 100
 
 [node name="AbilityFactory" type="Node2D" parent="." node_paths=PackedStringArray("projectileSpawner", "meleeHitbox")]
 script = ExtResource("2_8wqmu")
@@ -223,12 +210,3 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_eejjh")
 anim_player = NodePath("../AnimationPlayer")
-
-[node name="HpBar" type="ProgressBar" parent="."]
-offset_left = -24.0
-offset_top = -27.0
-offset_right = 24.0
-offset_bottom = -11.0
-theme_override_font_sizes/font_size = 8
-step = 1.0
-value = 100.0

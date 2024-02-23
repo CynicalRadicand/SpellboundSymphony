@@ -12,8 +12,6 @@ public partial class Player : Entity
 
     private AbilityInfo storedAbility = null;
 
-
-
     public override void _Ready()
     {
         conductor.Beat += CountDown;
@@ -23,10 +21,6 @@ public partial class Player : Entity
 
         factory = GetNode<AbilityFactory>("AbilityFactory");
 
-        hpBar = GetNode<ProgressBar>("HpBar");
-        hpBar.MaxValue = maxHp;
-        hp = maxHp;
-        updateHP();
 
         spellBook = new SpellBook();
         spellBook.ClearLoadout();
