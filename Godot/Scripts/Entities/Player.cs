@@ -60,7 +60,7 @@ public partial class Player : Entity
             EmitSignal(SignalName.FinishInput);
         }
 
-        if (beatNum == 1 && !casting)
+        if (beatNum == 4 && casting)
         {
             animation.Travel("Idle");
         }

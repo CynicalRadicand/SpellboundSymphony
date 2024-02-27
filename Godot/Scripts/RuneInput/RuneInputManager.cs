@@ -31,8 +31,5 @@ public partial class RuneInputManager : Node
             inputDTO.KeyAction = Elements.WATER;
             EmitSignal(SignalName.InputSignal, inputDTO);
         }
-
-
-
     }
 }

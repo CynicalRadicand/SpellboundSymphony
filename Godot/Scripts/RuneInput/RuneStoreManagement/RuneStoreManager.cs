@@ -19,6 +19,8 @@ public partial class RuneStoreManager : Node
 
     private bool cooldown;
 
+    private bool beatWithoutInput;
+
 
 
     public override void _Ready()
@@ -95,6 +97,7 @@ public partial class RuneStoreManager : Node
     //TODO: add to signal listener
     private void HandleInput(InputDTO inputDTO)
     {
+        beatWithoutInput = false;
         if (inputDTO.KeyAction == Elements.AIR)
         {
             AddRune(new Rune(Elements.AIR, "A", inputDTO.Accuracy));
@@ -111,13 +114,22 @@ public partial class RuneStoreManager : Node
         {
             AddRune(new Rune(Elements.WATER, "W", inputDTO.Accuracy));
         }
+        if (inputDTO.KeyAction == Elements.MISS)
+        {
+            AddRune(new Rune(Elements.MISS, "X", inputDTO.Accuracy));
+        }
     }
 
     private void ClearCD(int beatNum, bool casting)
     {
+        if (!casting && beatWithoutInput)
+        {
+            AddRune(new Rune(Elements.MISS, "X", Accuracy.MISS));
+        }
         if (beatNum == 4 && casting)
         {
             cooldown = false;
         }
+        beatWithoutInput = true;
     }
 }
