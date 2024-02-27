@@ -860,7 +860,7 @@ states/Start/position = Vector2(127, 170)
 states/idle/node = SubResource("AnimationNodeAnimation_loopy")
 states/idle/position = Vector2(306, 170)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_chwfp"), "idle", "ProjectileTelegraph", SubResource("AnimationNodeStateMachineTransition_icdca"), "ProjectileTelegraph", "Projectile", SubResource("AnimationNodeStateMachineTransition_063ji"), "Projectile", "idle", SubResource("AnimationNodeStateMachineTransition_hv0eo"), "idle", "AttackTelegraph", SubResource("AnimationNodeStateMachineTransition_slgv5"), "Attack", "idle", SubResource("AnimationNodeStateMachineTransition_qx8w7"), "AttackTelegraph", "Attack", SubResource("AnimationNodeStateMachineTransition_l2ghk"), "idle", "SpewTelegraph", SubResource("AnimationNodeStateMachineTransition_587pa"), "SpewTelegraph", "Spew", SubResource("AnimationNodeStateMachineTransition_rkiwl"), "Spew", "idle", SubResource("AnimationNodeStateMachineTransition_71o0h"), "idle", "Hurt", SubResource("AnimationNodeStateMachineTransition_ij4b6"), "Hurt", "idle", SubResource("AnimationNodeStateMachineTransition_6h3f2")]
-graph_offset = Vector2(-50.941, 162.545)
+graph_offset = Vector2(-85.941, 42.545)
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_mftpl")

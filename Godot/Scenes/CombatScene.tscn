@@ -21,9 +21,10 @@ conductor = NodePath("../../Managers/Conductor")
 
 [node name="RuneInput" parent="." instance=ExtResource("2_ln4v5")]
 
-[node name="RuneStoreManager" parent="RuneInput" index="1" node_paths=PackedStringArray("player")]
+[node name="RuneStoreManager" parent="RuneInput" index="1" node_paths=PackedStringArray("player", "conductor")]
 player = NodePath("../../Player")
 timingManagerPath = NodePath("../../Managers/TimingManager")
+conductor = NodePath("../../Managers/Conductor")
 
 [node name="Managers" type="Node" parent="."]
 
