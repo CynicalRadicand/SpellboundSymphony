@@ -2,8 +2,7 @@ using Godot;
 
 public partial class DataPreloader : Node
 {
-    private static string ABILITY_CONFIG_PATH = "res://Config/AbilityInfo/";
-    private static string ENEMY_CONFIG_PATH = "res://Config/EnemyInfo/";
+    private static string ABILITY_CONFIG_PATH = "res://Config/AbilityInfo";
 
     /// <summary>
     /// Use this method to load up the values for abilities before entering combat.
@@ -17,9 +16,9 @@ public partial class DataPreloader : Node
         //AbilityInfo.Deserialize(jsonString);
     }
 
-    public static EnemyAbilityInfo GetEnemyAbilityInfo(string filename)
+    public static EnemyAbilityInfo GetEnemyAbilityInfo(string enemy, string filename)
     {
-        return EnemyAbilityInfo.Deserialize(ABILITY_CONFIG_PATH + filename);
+        return EnemyAbilityInfo.Deserialize($"{ABILITY_CONFIG_PATH}/{enemy}/{filename}.json");
     }
 
     // public static EnemyInfo GetEnemyInfo(string filename)

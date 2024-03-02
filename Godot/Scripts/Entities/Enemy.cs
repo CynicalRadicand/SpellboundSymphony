@@ -24,7 +24,7 @@ public partial class Enemy : Entity
 
         foreach (string ability in abilities)
         {
-            moveSet.Add(DataPreloader.GetEnemyAbilityInfo($"{enemy}/{ability}.json"));
+            moveSet.Add(DataPreloader.GetEnemyAbilityInfo(enemy, ability));
         }
 
 
