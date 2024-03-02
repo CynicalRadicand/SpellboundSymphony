@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://5cwvymoljtmk"]
+[gd_scene load_steps=31 format=3 uid="uid://5cwvymoljtmk"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Player.cs" id="1_u7ibd"]
 [ext_resource type="Script" path="res://Assets/Entities/AbilityFactory.cs" id="2_8wqmu"]
@@ -91,6 +91,23 @@ tracks/0/keys = {
 "values": [6]
 }
 
+[sub_resource type="Animation" id="Animation_1h8ai"]
+resource_name = "Recover"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [54, 55]
+}
+
 [sub_resource type="Animation" id="Animation_1vne1"]
 resource_name = "Telegraph"
 length = 0.3
@@ -115,6 +132,7 @@ _data = {
 "Idle": SubResource("Animation_ycwuv"),
 "Lightning Bolt": SubResource("Animation_bwqrh"),
 "RESET": SubResource("Animation_hlb7j"),
+"Recover": SubResource("Animation_1h8ai"),
 "Telegraph": SubResource("Animation_1vne1")
 }
 
@@ -129,6 +147,9 @@ animation = &"Idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lsoa0"]
 animation = &"Lightning Bolt"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ixalb"]
+animation = &"Recover"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_16048"]
 animation = &"Telegraph"
@@ -148,29 +169,33 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ejjtt"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lordr"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ohmnf"]
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7mi8g"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gn4dv"]
 switch_mode = 2
 advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2kpr8"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_eejjh"]
 states/End/position = Vector2(1007, 170)
 states/Fizzle/node = SubResource("AnimationNodeAnimation_tk66l")
-states/Fizzle/position = Vector2(411.184, 93.9954)
+states/Fizzle/position = Vector2(387.184, -20.0046)
 states/Hurt/node = SubResource("AnimationNodeAnimation_7yk24")
 states/Hurt/position = Vector2(410.809, 170)
 states/Idle/node = SubResource("AnimationNodeAnimation_o0r3n")
 states/Idle/position = Vector2(272.809, 170)
 "states/Lightning Bolt/node" = SubResource("AnimationNodeAnimation_lsoa0")
-"states/Lightning Bolt/position" = Vector2(228.559, -132.547)
+"states/Lightning Bolt/position" = Vector2(272.809, -64.547)
+states/Recover/node = SubResource("AnimationNodeAnimation_ixalb")
+states/Recover/position = Vector2(290.684, 79.218)
 states/Start/position = Vector2(127, 170)
 states/Telegraph/node = SubResource("AnimationNodeAnimation_16048")
 states/Telegraph/position = Vector2(168.684, 4.43663)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_2akco"), "Idle", "Hurt", SubResource("AnimationNodeStateMachineTransition_21ja6"), "Hurt", "Idle", SubResource("AnimationNodeStateMachineTransition_n2e1f"), "Idle", "Telegraph", SubResource("AnimationNodeStateMachineTransition_kghbf"), "Telegraph", "Lightning Bolt", SubResource("AnimationNodeStateMachineTransition_cxne7"), "Telegraph", "Fizzle", SubResource("AnimationNodeStateMachineTransition_ejjtt"), "Fizzle", "Idle", SubResource("AnimationNodeStateMachineTransition_lordr"), "Lightning Bolt", "Idle", SubResource("AnimationNodeStateMachineTransition_7mi8g")]
-graph_offset = Vector2(-53.316, -66.782)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_2akco"), "Idle", "Hurt", SubResource("AnimationNodeStateMachineTransition_21ja6"), "Hurt", "Idle", SubResource("AnimationNodeStateMachineTransition_n2e1f"), "Idle", "Telegraph", SubResource("AnimationNodeStateMachineTransition_kghbf"), "Telegraph", "Lightning Bolt", SubResource("AnimationNodeStateMachineTransition_cxne7"), "Telegraph", "Fizzle", SubResource("AnimationNodeStateMachineTransition_ejjtt"), "Lightning Bolt", "Recover", SubResource("AnimationNodeStateMachineTransition_ohmnf"), "Fizzle", "Recover", SubResource("AnimationNodeStateMachineTransition_gn4dv"), "Recover", "Idle", SubResource("AnimationNodeStateMachineTransition_2kpr8")]
+graph_offset = Vector2(-306.316, -4.782)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_u7ibd")

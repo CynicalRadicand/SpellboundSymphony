@@ -43,6 +43,7 @@ public partial class TimingManager : Node
                 break;
             default:
                 GD.Print("MISS");
+                inputDTO.KeyAction = Elements.MISS;
                 inputDTO.Accuracy = Accuracy.MISS;
                 break;
         }

@@ -60,6 +60,11 @@ public partial class Player : Entity
             EmitSignal(SignalName.FinishInput);
         }
 
+        if (beatNum == 4 && casting)
+        {
+            animation.Travel("Idle");
+        }
+
     }
 
     private void TriggerAbility()
